@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/Kam-Website/static/css/main.5adc7942.css",
+    "main.js": "/Kam-Website/static/js/main.f8dc6bea.js",
+    "static/js/453.79ea3138.chunk.js": "/Kam-Website/static/js/453.79ea3138.chunk.js",
+    "index.html": "/Kam-Website/index.html",
+    "main.5adc7942.css.map": "/Kam-Website/static/css/main.5adc7942.css.map",
+    "main.f8dc6bea.js.map": "/Kam-Website/static/js/main.f8dc6bea.js.map",
+    "453.79ea3138.chunk.js.map": "/Kam-Website/static/js/453.79ea3138.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.5adc7942.css",
+    "static/js/main.f8dc6bea.js"
+  ]
+}
