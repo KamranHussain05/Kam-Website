@@ -1,0 +1,15 @@
+.navlogin {
+    margin-left: auto;
+    cursor: pointer;
+    margin-right: 60px;
+}
+  
+.profile {
+max-width: 30px;
+max-height: 30px;
+aspect-ratio: 1/1;
+}
+
+.menuop {
+margin-left: 6px;
+}
