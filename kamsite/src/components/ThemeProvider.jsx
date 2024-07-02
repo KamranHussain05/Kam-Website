@@ -20,6 +20,7 @@ export const ThemeProvider = ({ children }) => {
         setMode((prevMode) => {
           const newMode = prevMode === 'light' ? 'dark' : 'light';
           localStorage.setItem('colorMode', newMode);
+          document.documentElement.classList.toggle('dark', newMode === 'dark');
           return newMode;
         });
       },
@@ -36,6 +37,10 @@ export const ThemeProvider = ({ children }) => {
       }),
     [mode],
   );
+
+  useEffect(() => {
+    document.documentElement.classList.toggle('dark', mode === 'dark');
+  }, [mode]);
 
   return (
     <ColorModeContext.Provider value={colorMode}>

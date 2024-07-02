@@ -1,3 +1,122 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --primary-color: #0077be;
+  --secondary-color: #00a86b;
+  --text-color: #ece4e4;
+  --background-color: #999090;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  color: var(--text-color);
+  background-color: var(--background-color);
+  line-height: 1.6;
+  margin: 0;  /* Add this line to remove the top margin */
+  padding: 0; /* Add this line to remove any padding */
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+}
+
+.App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Custom styles for the navbar */
+.navbar {
+  backdrop-filter: blur(10px);
+  transition: background-color 0.3s ease;
+  color: white;
+}
+
+.navbar.scrolled {
+  background-color: rgba(255, 255, 255, 0.95);
+}
+
+/* Custom styles for buttons */
+.custom-button {
+  @apply px-4 py-2 rounded-md transition-colors duration-300;
+  background-color: var(--primary-color);
+  color: rgb(255, 255, 255);
+}
+
+.custom-button:hover {
+  background-color: var(--secondary-color);
+}
+
+/* Custom styles for the main content area */
+.main-content {
+  @apply mt-16 p-6 bg-white bg-opacity-90 dark:bg-gray-800 dark:bg-opacity-90 rounded-lg shadow-lg;
+  margin-top: 0;
+}
+
+/* Custom styles for the timeline */
+.timeline-item {
+  @apply mb-8;
+}
+
+.timeline-dot {
+  @apply bg-blue-500;
+}
+
+.timeline-content {
+  @apply ml-4 bg-gray-700 p-4 rounded-lg shadow;
+  /* background-color: #2e240f; */
+}
+
+/* Dark mode styles */
+.dark body {
+  --text-color: #e0e0e0;
+  --background-color: #121212;
+}
+
+.dark .navbar {
+  background-color: rgba(18, 18, 18, 0.8);
+}
+
+.dark .navbar.scrolled {
+  background-color: rgba(18, 18, 18, 0.95);
+}
+
+.dark .custom-button {
+  background-color: var(--secondary-color);
+}
+
+.dark .custom-button:hover {
+  background-color: var(--primary-color);
+}
+
+.dark .main-content {
+  @apply bg-gray-800 bg-opacity-90;
+}
+
+.dark .timeline-content {
+  @apply bg-gray-700;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.fade-in {
+  animation: fadeIn 1s ease-in;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .main-content {
+    @apply mt-8 p-4;
+  }
+}

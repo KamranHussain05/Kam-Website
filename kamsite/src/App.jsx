@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { ThemeProvider } from './ThemeProvider';
+import ThemeProvider from './components/ThemeProvider';
 import Navbar from './components/navbar';
 import MainPage from './pages/home';
 // Import other page components when they're created

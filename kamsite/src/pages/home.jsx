@@ -2,10 +2,13 @@ import React from 'react';
 import { Typography, Container, Box } from '@mui/material';
 import { Timeline, TimelineItem, TimelineSeparator, TimelineConnector, TimelineContent, TimelineDot } from '@mui/lab';
 import BrainVisualization from '../components/brainviz';
+import Navbar from '../components/navbar';
+import ThemeProvider from '../components/ThemeProvider';
 
 const MainPage = () => {
   return (
-    <>
+    <div className="main-content fade-in">
+      <Navbar />
       <BrainVisualization />
       <Container maxWidth="md" className="relative z-10 pt-16">
         <Box className="text-center mb-8">
@@ -26,31 +29,31 @@ const MainPage = () => {
             Timeline
           </Typography>
           <Timeline position="alternate">
-            <TimelineItem>
+          <TimelineItem className="timeline-item">
               <TimelineSeparator>
-                <TimelineDot color="primary" />
+                <TimelineDot className='timeline-dot'/>
                 <TimelineConnector />
               </TimelineSeparator>
-              <TimelineContent>
+              <TimelineContent className="timeline-content">
                 <Typography variant="h6">2020</Typography>
                 <Typography>Started my current job at XYZ Company</Typography>
               </TimelineContent>
             </TimelineItem>
-            <TimelineItem>
+            <TimelineItem className="timeline-item">
               <TimelineSeparator>
-                <TimelineDot color="primary" />
+                <TimelineDot className="timeline-dot" />
                 <TimelineConnector />
               </TimelineSeparator>
-              <TimelineContent>
+              <TimelineContent className="timeline-content">
                 <Typography variant="h6">2018</Typography>
                 <Typography>Graduated from University with a degree in Computer Science</Typography>
               </TimelineContent>
             </TimelineItem>
-            <TimelineItem>
+            <TimelineItem className="timeline-item">
               <TimelineSeparator>
-                <TimelineDot color="primary" />
+                <TimelineDot className="timeline-dot" />
               </TimelineSeparator>
-              <TimelineContent>
+              <TimelineContent className="timeline-content">
                 <Typography variant="h6">2015</Typography>
                 <Typography>Started my first internship at ABC Tech</Typography>
               </TimelineContent>
@@ -58,7 +61,7 @@ const MainPage = () => {
           </Timeline>
         </Box>
       </Container>
-    </>
+    </div>
   );
 };
 

@@ -1,10 +1,11 @@
 import React, { useState, useContext } from 'react';
-import { AppBar, Toolbar, Typography, Button, IconButton, Drawer, List, ListItem, ListItemText, Switch } from '@mui/material';
+import { AppBar, Toolbar, Typography, Button, IconButton, Drawer, List, ListItem, ListItemText, Switch, Box } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
 import { ColorModeContext } from './ThemeProvider';
 import { useTheme } from '@mui/material/styles';
+import '../css/index.css';
 
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -23,7 +24,7 @@ const Navbar = () => {
   ];
 
   const drawer = (
-    <div className="p-4">
+    <Box sx={{ width: 250 }} role="presentation" onClick={handleDrawerToggle}>
       <List>
         {menuItems.map((item) => (
           <ListItem button key={item.text} component="a" href={item.href}>
@@ -31,55 +32,52 @@ const Navbar = () => {
           </ListItem>
         ))}
       </List>
-      <div className="flex items-center justify-center mt-4">
+      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', mt: 2 }}>
         <Brightness4Icon />
         <Switch checked={theme.palette.mode === 'dark'} onChange={colorMode.toggleColorMode} />
         <Brightness7Icon />
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 
   return (
-    <>
-      <AppBar position="static" color="transparent" elevation={0} className="backdrop-blur-sm">
-        <Toolbar>
-          <Typography variant="h6" component="div" className="flex-grow">
-            Your Name
-          </Typography>
-          <div className="hidden md:flex items-center">
-            {menuItems.map((item) => (
-              <Button key={item.text} color="inherit" href={item.href}>
-                {item.text}
-              </Button>
-            ))}
-            <IconButton sx={{ ml: 1 }} onClick={colorMode.toggleColorMode} color="inherit">
-              {theme.palette.mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
-            </IconButton>
-          </div>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="end"
-            onClick={handleDrawerToggle}
-            className="md:hidden"
-          >
-            <MenuIcon />
+    <AppBar position="static" color='transparent' elevation={0} className="navbar">
+      <Toolbar sx={{ justifyContent: 'space-between' }}>
+        <Typography variant="h6" component="div">
+          Kamran Hussain
+        </Typography>
+        <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center' }}>
+          {menuItems.map((item) => (
+            <Button key={item.text} color="inherit" href={item.href} sx={{ ml: 2 }}>
+              {item.text}
+            </Button>
+          ))}
+          <IconButton sx={{ ml: 2 }} onClick={colorMode.toggleColorMode} color="inherit">
+            {theme.palette.mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
           </IconButton>
-        </Toolbar>
-      </AppBar>
+        </Box>
+        <IconButton
+          color="inherit"
+          aria-label="open drawer"
+          edge="end"
+          onClick={handleDrawerToggle}
+          sx={{ display: { md: 'none' } }}
+        >
+          <MenuIcon />
+        </IconButton>
+      </Toolbar>
       <Drawer
-        variant="temporary"
         anchor="right"
         open={mobileOpen}
         onClose={handleDrawerToggle}
         ModalProps={{
           keepMounted: true, // Better open performance on mobile.
         }}
-        className="block md:hidden"
+        sx={{ display: { xs: 'block', md: 'none' } }}
       >
         {drawer}
       </Drawer>
-    </>
+    </AppBar>
   );
 };
 
