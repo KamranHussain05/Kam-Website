@@ -1,126 +1,86 @@
-import React, { useState, useEffect } from 'react';
-//import '../css/navbar.css';
-import '../css/bootstrap-5.0.0-beta2.min.css'
-import '../css/main.css'
-import { useNavigate } from "react-router-dom";
-import IconButton from '@mui/material/IconButton';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
+import React, { useState, useContext } from 'react';
+import { AppBar, Toolbar, Typography, Button, IconButton, Drawer, List, ListItem, ListItemText, Switch } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import { useLocation } from 'react-router-dom';
+import Brightness4Icon from '@mui/icons-material/Brightness4';
+import Brightness7Icon from '@mui/icons-material/Brightness7';
+import { ColorModeContext } from './ThemeProvider';
+import { useTheme } from '@mui/material/styles';
 
-const NavBarItem = (props) => {
-  return (
-    <li className="nav-item" id={props.id}>
-      <a className="page-scroll d-none d-lg-block" href={props.linkType + props.name.toLowerCase()}>
-        {props.name}
-      </a>
-    </li>
-  );
-};
+const Navbar = () => {
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const colorMode = useContext(ColorModeContext);
+  const theme = useTheme();
 
-const Navbar = (props) => {
-  const [anchorEl1, setAnchorEl1] = useState(null);
-  const open1 = Boolean(anchorEl1);
-  const [anchorEl2, setAnchorEl2] = useState(null);
-  const open2 = Boolean(anchorEl2);
-  const navigate = useNavigate();
-  const [display, setDisplay] = useState(true);
-  const location = useLocation();
-
-  useEffect(() => {
-    if (location.hash) {
-      let page = document.getElementById(location.hash.slice(1));
-      if (page) {
-        page.scrollIntoView({ behavior: "smooth" });
-      }
-    } else {
-      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-    }
-  }, [location]);
-
-  const handleClick1 = (event) => {
-    setAnchorEl1(event.currentTarget);
-  };
-  const handleClose1 = () => {
-    setAnchorEl1(null);
-  };
-  const handleClick2 = (event) => {
-    setAnchorEl2(event.currentTarget);
-  };
-  
-  const handleClose2 = () => {
-    setAnchorEl2(null);
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
   };
 
-  const editDisplay = () => {
-    if (display) {
-      alert('Unfortunately Light Mode is currently unavailable since it\'s highkey trash.');
-    } else {
-      let bool = !display;
-      setDisplay(bool);
-    }
-  };
+  const menuItems = [
+    { text: 'Home', href: '/' },
+    { text: 'Podcast', href: '/podcast' },
+    { text: 'Blog', href: '/blog' },
+    { text: 'Publications', href: '/publications' },
+  ];
 
-  return (
-    <div className="navbar-area">
-      <div className="container">
-        <div className="row align-items-center">
-          <div className="col-lg-12">
-            <nav className="navbar navbar-expand-lg">
-              <IconButton
-                edge="start"
-                color="inherit"
-                aria-label="menu"
-                aria-controls={open1 ? 'basic-menu' : undefined}
-                aria-haspopup="true"
-                onClick={handleClick1}
-              >
-                <MenuIcon />
-              </IconButton>
-              <Menu
-                id="basic-menu"
-                anchorEl={anchorEl1}
-                open={open1}
-                onClose={handleClose1}
-                MenuListProps={{
-                  'aria-labelledby': 'basic-button',
-                }}
-              >
-                <MenuItem onClick={() => {navigate('/'); handleClose1();}}>
-                  <div className='menuop'>Home</div>
-                </MenuItem>
-                <MenuItem onClick={() => {navigate('/podcast'); handleClose1();}}>
-                  <div className='menuop'>Podcast</div>
-                </MenuItem>
-                <MenuItem onClick={() => {navigate('/research'); handleClose1();}}>
-                  <div className='menuop'>Research</div>
-                </MenuItem>
-              </Menu>
-              <div
-                className="collapse navbar-collapse sub-menu-bar"
-                id="navbarSupportedContent"
-              >
-                <div className="ms-auto">
-                  <ul id="nav" className="navbar-nav ms-auto">
-                    <NavBarItem id={props.id} name="Home" linkType="/" />
-                    <NavBarItem id={props.id} name="Podcast" linkType="/" />
-                    <NavBarItem id={props.id} name="Research" linkType="/" />
-                  </ul>
-                </div>
-                {/* Navbar links (visible on large screens) */}
-              </div>
-              {/* Navbar collapse */}
-              {/* Header button (visible on all screens) */}
-            </nav>
-            {/* Navbar */}
-          </div>
-        </div>
-        {/* Row */}
+  const drawer = (
+    <div className="p-4">
+      <List>
+        {menuItems.map((item) => (
+          <ListItem button key={item.text} component="a" href={item.href}>
+            <ListItemText primary={item.text} />
+          </ListItem>
+        ))}
+      </List>
+      <div className="flex items-center justify-center mt-4">
+        <Brightness4Icon />
+        <Switch checked={theme.palette.mode === 'dark'} onChange={colorMode.toggleColorMode} />
+        <Brightness7Icon />
       </div>
-      {/* Container */}
     </div>
   );
-}
+
+  return (
+    <>
+      <AppBar position="static" color="transparent" elevation={0} className="backdrop-blur-sm">
+        <Toolbar>
+          <Typography variant="h6" component="div" className="flex-grow">
+            Your Name
+          </Typography>
+          <div className="hidden md:flex items-center">
+            {menuItems.map((item) => (
+              <Button key={item.text} color="inherit" href={item.href}>
+                {item.text}
+              </Button>
+            ))}
+            <IconButton sx={{ ml: 1 }} onClick={colorMode.toggleColorMode} color="inherit">
+              {theme.palette.mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
+            </IconButton>
+          </div>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            edge="end"
+            onClick={handleDrawerToggle}
+            className="md:hidden"
+          >
+            <MenuIcon />
+          </IconButton>
+        </Toolbar>
+      </AppBar>
+      <Drawer
+        variant="temporary"
+        anchor="right"
+        open={mobileOpen}
+        onClose={handleDrawerToggle}
+        ModalProps={{
+          keepMounted: true, // Better open performance on mobile.
+        }}
+        className="block md:hidden"
+      >
+        {drawer}
+      </Drawer>
+    </>
+  );
+};
 
 export default Navbar;

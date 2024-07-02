@@ -1,5 +1,3 @@
-import Home from './home'; 
-import Research from './research';
-import Podcast from './podcast';   
+import MainPage from "./home";
 
-export default {Home, Podcast, Research};
+export default {MainPage};

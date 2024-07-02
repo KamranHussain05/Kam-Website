@@ -3,17 +3,15 @@ import ReactDOM from 'react-dom/client';
 import './css/index.css';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
-import Views from './pages/Views.jsx';
+import Views from './pages/Views';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Views.Home/>} />
-          <Route path="/research" element={<Views.Research/>} />
+          <Route path="/" element={<Views.MainPage/>} />
           <Route path="/home" element={<Navigate to="/" />} />
-          <Route path="/podcast" element={<Views.Podcast />} />
         </Routes>
     </BrowserRouter>
   </React.StrictMode>
