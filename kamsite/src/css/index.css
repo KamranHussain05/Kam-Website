@@ -10,12 +10,14 @@
   --secondary-color: #00a86b;
   --text-color: #ece4e4;
   --background-color: #999090;
+  --background-opacity: 1; /* Add this line to control background opacity */
 }
 
 body {
   font-family: 'Roboto', sans-serif;
   color: var(--text-color);
-  background-color: var(--background-color);
+  /* background-color: var(--background-color); */
+  background-color: rgba(153, 144, 144, var(--background-opacity)); /* Adjust background color to use opacity */
   line-height: 1.6;
   margin: 0;  /* Add this line to remove the top margin */
   padding: 0; /* Add this line to remove any padding */
@@ -58,6 +60,7 @@ h1, h2, h3, h4, h5, h6 {
 .main-content {
   @apply mt-16 p-6 bg-white bg-opacity-90 dark:bg-gray-800 dark:bg-opacity-90 rounded-lg shadow-lg;
   margin-top: 0;
+  background-color: rgba(255, 255, 255, 0.8); /* Adjust opacity for better visibility */
 }
 
 /* Custom styles for the timeline */
@@ -98,6 +101,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .dark .main-content {
   @apply bg-gray-800 bg-opacity-90;
+  background-color: rgba(18, 18, 18, --background-opacity); /* Adjust opacity for dark mode */
 }
 
 .dark .timeline-content {
