@@ -16,10 +16,12 @@ export function AboutSection() {
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-4">About Me</h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            I'm a neuroscience researcher and AI developer passionate about understanding
-            the brain and building intelligent systems. My work combines cutting-edge
-            machine learning techniques with neuroscience research to push the boundaries
-            of what's possible.
+            I'm an aspiring computational neuroscientist and machine learning researcher 
+            passionate about understanding the brain and building intelligent systems. 
+            My work combines cutting-edge machine learning techniques with neuroscience research 
+            to push the boundaries of what's possible. Some of the work I've done to push the boundaries
+            of both machine learning and neuroscience includes restoring communication via  a
+            conversational speed speech brain computer interface and a foundation model for electrophysiology.
           </p>
         </motion.div>
 
@@ -38,10 +40,10 @@ export function AboutSection() {
               interested in:
             </p>
             <ul className="list-disc list-inside space-y-2 text-muted-foreground">
-              <li>Neural network architectures</li>
-              <li>Brain-computer interfaces</li>
-              <li>Machine learning for neuroscience</li>
-              <li>Computational neuroscience</li>
+              <li>Brain-Computer Interfaces</li>
+              <li>Foundation Models for Neuroscience</li>
+              <li>Neuroscience Inspired Machine Learning</li>
+              <li>Representational Drift</li>
             </ul>
           </motion.div>
 
@@ -57,10 +59,10 @@ export function AboutSection() {
               When I'm not researching or coding, you can find me:
             </p>
             <ul className="list-disc list-inside space-y-2 text-muted-foreground">
-              <li>Competitive fencing</li>
-              <li>Star Wars enthusiast</li>
+              <li>Competitively fencing</li>
+              <li>Watching Star Wars</li>
               <li>Exploring new technologies</li>
-              <li>Contributing to open-source projects</li>
+              <li>Building costumes, robots, or automating my life</li>
             </ul>
           </motion.div>
         </div>

@@ -5,22 +5,22 @@ import { Github, Linkedin, Twitter, Mail } from 'lucide-react'
 const socialLinks = [
   {
     icon: Github,
-    href: 'https://github.com/yourusername',
+    href: 'https://github.com/kamranhussain05',
     label: 'GitHub',
   },
   {
     icon: Linkedin,
-    href: 'https://linkedin.com/in/yourusername',
+    href: 'https://linkedin.com/in/kamran-hussain1',
     label: 'LinkedIn',
   },
   {
     icon: Twitter,
-    href: 'https://twitter.com/yourusername',
+    href: 'https://x.com/kamhn123',
     label: 'Twitter',
   },
   {
     icon: Mail,
-    href: 'mailto:your.email@example.com',
+    href: 'mailto:kahussai@ucsc.com',
     label: 'Email',
   },
 ]
@@ -33,8 +33,9 @@ export function Footer() {
           <div>
             <h3 className="text-lg font-semibold mb-4">Kamran Hussain</h3>
             <p className="text-muted-foreground">
-              Neuroscience researcher and AI developer passionate about understanding
-              the brain and building intelligent systems.
+              Aspiring computational neuroscientist and machine learning researcher 
+              eager to apply machine learning methods to neuroprosthetic devices
+              and build our understanding of the brain.
             </p>
           </div>
 

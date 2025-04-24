@@ -4,14 +4,15 @@ import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { ThemeToggle } from './theme-toggle'
 import { Menu, X } from 'lucide-react'
+import Link from 'next/link'
 
 const navItems = [
-  { label: 'Home', href: '#' },
-  { label: 'About', href: '#about' },
-  { label: 'Research', href: '#research' },
-  { label: 'Projects', href: '#projects' },
-  { label: 'Blog', href: '/blog' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Home', href: '/' },
+  { label: 'About', href: '/#about' },
+  { label: 'Research', href: '/#research' },
+  { label: 'Projects', href: '/#projects' },
+  { label: 'Blog', href: '/blog/' },
+  { label: 'Contact', href: '/#contact' },
 ]
 
 export function Navbar() {
@@ -38,20 +39,20 @@ export function Navbar() {
     >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          <a href="#" className="text-xl font-bold">
+          <Link href="/" className="text-xl font-bold">
             KH
-          </a>
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
-              <a
+              <Link
                 key={item.label}
                 href={item.href}
                 className="text-muted-foreground hover:text-primary transition-colors"
               >
                 {item.label}
-              </a>
+              </Link>
             ))}
             <ThemeToggle />
           </div>
@@ -79,14 +80,14 @@ export function Navbar() {
           >
             <div className="flex flex-col space-y-4">
               {navItems.map((item) => (
-                <a
+                <Link
                   key={item.label}
                   href={item.href}
                   className="text-muted-foreground hover:text-primary transition-colors"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {item.label}
-                </a>
+                </Link>
               ))}
               <div className="pt-4">
                 <ThemeToggle />

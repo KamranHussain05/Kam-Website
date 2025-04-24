@@ -29,7 +29,7 @@ export default function BlogPage() {
             transition={{ duration: 0.5, delay: index * 0.1 }}
             className="bg-card rounded-lg p-6 shadow-lg hover:shadow-xl transition-shadow"
           >
-            <Link href={`/blog/${slug}`}>
+            <Link href={`/blog/${slug}/`}>
               <h2 className="text-2xl font-semibold mb-2 hover:text-primary transition-colors">
                 {post.title}
               </h2>
@@ -39,7 +39,7 @@ export default function BlogPage() {
             </time>
             <p className="mt-4 text-muted-foreground">{post.excerpt}</p>
             <Link
-              href={`/blog/${slug}`}
+              href={`/blog/${slug}/`}
               className="inline-block mt-4 text-primary hover:underline"
             >
               Read more →

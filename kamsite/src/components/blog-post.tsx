@@ -20,7 +20,7 @@ export function BlogPost({ post }: BlogPostProps) {
     return (
       <div className="text-center py-12">
         <h1 className="text-2xl font-bold mb-4">Post not found</h1>
-        <Link href="/blog" className="text-primary hover:underline">
+        <Link href="/blog/" className="text-primary hover:underline">
           Return to blog
         </Link>
       </div>
@@ -35,7 +35,7 @@ export function BlogPost({ post }: BlogPostProps) {
         transition={{ duration: 0.5 }}
       >
         <Link
-          href="/blog"
+          href="/blog/"
           className="inline-flex items-center text-muted-foreground hover:text-primary transition-colors mb-8"
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
