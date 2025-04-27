@@ -7,19 +7,23 @@ export function NeuralNetwork() {
   const containerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    if (!containerRef.current) return
+    const currentContainer = containerRef.current;
+    if (!currentContainer) return;
+
+    const width = currentContainer.clientWidth;
+    const height = currentContainer.clientHeight;
 
     // Scene setup
     const scene = new THREE.Scene()
     const camera = new THREE.PerspectiveCamera(
       75,
-      window.innerWidth / window.innerHeight,
+      width / height,
       0.1,
       1000
     )
     const renderer = new THREE.WebGLRenderer({ alpha: true })
-    renderer.setSize(window.innerWidth, window.innerHeight)
-    containerRef.current.appendChild(renderer.domElement)
+    renderer.setSize(width, height)
+    currentContainer.appendChild(renderer.domElement)
 
     // Create nodes
     const nodes: THREE.Mesh[] = []
@@ -88,9 +92,13 @@ export function NeuralNetwork() {
 
     // Handle resize
     const handleResize = () => {
-      camera.aspect = window.innerWidth / window.innerHeight
-      camera.updateProjectionMatrix()
-      renderer.setSize(window.innerWidth, window.innerHeight)
+      if (!containerRef.current) return;
+      const newWidth = containerRef.current.clientWidth;
+      const newHeight = containerRef.current.clientHeight;
+      
+      camera.aspect = newWidth / newHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(newWidth, newHeight);
     }
 
     window.addEventListener('resize', handleResize)
@@ -98,10 +106,10 @@ export function NeuralNetwork() {
     // Cleanup
     return () => {
       window.removeEventListener('resize', handleResize)
-      containerRef.current?.removeChild(renderer.domElement)
+      currentContainer?.removeChild(renderer.domElement)
       scene.clear()
     }
   }, [])
 
-  return <div ref={containerRef} className="absolute inset-0" />
+  return <div ref={containerRef} className="absolute inset-0 w-full h-full" />
 } 

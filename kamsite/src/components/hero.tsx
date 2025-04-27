@@ -50,16 +50,12 @@ export function Hero() {
             Learn More
           </a>
           <a
-            href="#contact"
+            href="mailto:kahussai@usc.edu"
             className="px-6 py-3 rounded-full border border-primary text-primary hover:bg-primary/10 transition-colors"
           >
             Contact Me
           </a>
         </motion.div>
-      </div>
-
-      <div className="absolute top-4 right-4">
-        <ThemeToggle />
       </div>
     </div>
   )

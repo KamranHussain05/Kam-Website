@@ -5,25 +5,25 @@ import { Github, ExternalLink } from 'lucide-react'
 
 const projects = [
   {
-    title: 'Neural Network Simulator',
-    description: 'A real-time simulator for studying neural network dynamics and learning patterns.',
-    tags: ['Python', 'TensorFlow', 'Neuroscience'],
-    github: 'https://github.com/yourusername/neural-simulator',
-    demo: 'https://demo.neural-simulator.com',
+    title: 'StatScanner',
+    description: 'A mobile app for scanning and analyzing statistical data on the go. Built custom OCR models to detect structured data from images and visualize said data in an interactive format.',
+    tags: ['Swift', 'Computer Vision', 'CoreML'],
+    github: 'https://github.com/KamranHussain05/StatScanner',
+    demo: ''
   },
   {
-    title: 'Brain-Computer Interface',
-    description: 'An interface that translates neural signals into computer commands.',
+    title: 'EMG Personal Computer Use',
+    description: 'An EMG wrist band for personal computer use via cursor control and click detection. I mentored undergraduate students during this project to learn about building a BCI from the ground up, leading both the decoding and hardware development.',
     tags: ['Python', 'ML', 'Neuroscience'],
-    github: 'https://github.com/yourusername/bci-interface',
-    demo: 'https://demo.bci-interface.com',
+    github: 'https://github.com/KamranHussain05/NeuroTechSCPersonalUse',
+    demo: ''
   },
   {
-    title: 'ML for Neural Data',
-    description: 'Machine learning models for analyzing and interpreting neural data.',
-    tags: ['Python', 'PyTorch', 'Data Science'],
-    github: 'https://github.com/yourusername/ml-neural',
-    demo: 'https://demo.ml-neural.com',
+    title: 'Gesture Driven Augmented Reality Navigation',
+    description: 'A computer vision based navigation system for augmented reality interfacing. This project won first place at the HelixHacks II hackathon and leveraged unity for 3D world modeling and AR integration.',
+    tags: ['Python', 'Computer Vision', 'Unity', '3D Modeling'],
+    github: 'https://github.com/KamranHussain05/facial-navigation-ar',
+    demo: ''
   },
 ]
 
