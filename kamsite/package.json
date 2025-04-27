@@ -7,8 +7,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "lint": "next lint",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d out",
+    "deploy": "gh-pages -d out -t true",
     "export": "next build && next export"
   },
   "dependencies": {
@@ -39,7 +40,7 @@
     "@types/react-dom": "^18.2.19",
     "@types/three": "^0.161.2",
     "autoprefixer": "^10.4.19",
-    "gh-pages": "^6.1.1",
+    "gh-pages": "^6.3.0",
     "postcss": "^8.4.39",
     "tailwindcss": "^3.4.4",
     "tailwindcss-animate": "^1.0.7",
