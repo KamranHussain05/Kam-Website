@@ -6,9 +6,7 @@ Welcome to the repository for my personal website! This project serves as a digi
 
 ## Live Demo
 
-You can view the live version of the website here: **[https://KamranHussain05.github.io/](https://KamranHussain05.github.io/)**
-
-*(Note: The `homepage` field in `kamsite/package.json` points to this URL, but the deployment seems configured via `next.config.js` and GitHub Actions, which is the standard approach for Next.js on GitHub Pages.)*
+You can view the live version of the website here: **[https://KamranHussain05.github.io/](https://kamranhussain.com/)**
 
 ## Features
 
@@ -60,9 +58,7 @@ The repository is organized as follows:
 │   │   ├── src/
 │   │   │   ├── app/            # Core application files (layouts, pages - likely using App Router)
 │   │   │   ├── components/     # Reusable React components
-│   │   │   ├── content/        # Markdown/MDX files for dynamic content (e.g., blog, projects)
 │   │   │   ├── styles/         # Global CSS styles (if any)
-│   │   │   └── css/            # CSS files (potentially module CSS)
 │   │   ├── .gitignore          # Specifies intentionally untracked files for kamsite
 │   │   ├── next.config.js      # Next.js configuration (handles basePath for GH Pages)
 │   │   ├── package.json        # Project metadata and dependencies for kamsite
@@ -80,7 +76,7 @@ The repository is organized as follows:
 
 ## Getting Started (Local Development)
 
-To run this project locally, follow these steps:
+To run this project locally, follow these steps (though you're kinda weird for running someone's personal website locally):
 
 1.  **Prerequisites:**
     *   [Node.js](https://nodejs.org/) (v18 or later recommended, as used in the deployment workflow)
@@ -146,4 +142,4 @@ Here's a breakdown of the deployment workflow:
 
 Feel free to explore the code, and if you have any questions or suggestions, please open an issue!
 
-DISCLAIMER: This is a work in progress and I will be updating it as I go along. I certainly used the assistance of LLMs via Cursor, but I really did write the core functional code myself. (Invite me for an interview if you want proof 😉, if there is any crappy code...uhhh...thats not me 😅!!)
+DISCLAIMER: This is a work in progress and I will be updating it as I go along. I certainly used the assistance of LLMs via Cursor, but I really did write the core functional code myself. (Invite me for an interview if you want proof 😉, if there is any crappy code...uhhh...thats not me 😅 I swear!!)
