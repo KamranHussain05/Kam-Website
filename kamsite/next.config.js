@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 
 const isProd = process.env.NODE_ENV === 'production'
+const isCI = process.env.CI === 'true' // Check for CI environment variable
 const repoName = 'Kam-Website' // Your GitHub repository name
 
 const nextConfig = {
@@ -8,10 +9,10 @@ const nextConfig = {
   images: {
     unoptimized: true, // Required for static export with next/image
   },
-  // Set basePath only for production builds on GitHub Pages
-  basePath: isProd ? `/${repoName}` : '',
+  // Set basePath only for production builds *unless* in CI (GitHub Actions)
+  basePath: isProd && !isCI ? `/${repoName}` : '',
   // Optional: Set assetPrefix if basePath doesn't cover all assets (usually not needed with basePath)
-  // assetPrefix: isProd ? `/${repoName}/` : '',
+  // assetPrefix: isProd && !isCI ? `/${repoName}/` : '',
   trailingSlash: true, // Optional: Consistent URL structure
 }
 
