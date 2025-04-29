@@ -9,6 +9,9 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata = {
   title: 'Kamran Hussain - Neuroscience & AI Researcher',
   description: 'Personal website of Kamran Hussain, focusing on neuroscience research and AI/ML development.',
+  icons: {
+    icon: '/favicon.png', // Path relative to the public directory
+  },
 }
 
 export default function RootLayout({
