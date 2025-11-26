@@ -6,21 +6,28 @@ import { Github, ExternalLink } from 'lucide-react'
 const projects = [
   {
     title: 'StatScanner',
-    description: 'A mobile app for scanning and analyzing statistical data on the go. Built custom OCR models to detect structured data from images and visualize said data in an interactive format.',
+    description: 'iOS app that scans tables from paper and turns them into interactive stats visualizations using custom OCR + CoreML.',
     tags: ['Swift', 'Computer Vision', 'CoreML'],
     github: 'https://github.com/KamranHussain05/StatScanner',
     demo: ''
   },
   {
+    title: 'Polaris',
+    description: 'On-device predictive maintenance for fishing vessels using sensor fusion and edge ML.',
+    tags: ['Embedded C++', 'Python', 'Sensor Fusion'],
+    github: 'https://github.com/KamranHussain05',
+    demo: ''
+  },
+  {
     title: 'EMG Personal Computer Use',
-    description: 'An EMG wrist band for personal computer use via cursor control and click detection. I mentored undergraduate students during this project to learn about building a BCI from the ground up, leading both the decoding and hardware development.',
+    description: 'EMG wristband that turns muscle activity into cursor control and clicks, built as a teaching BCI project.',
     tags: ['Python', 'ML', 'Neuroscience'],
     github: 'https://github.com/KamranHussain05/NeuroTechSCPersonalUse',
     demo: ''
   },
   {
     title: 'Gesture Driven Augmented Reality Navigation',
-    description: 'A computer vision based navigation system for augmented reality interfacing. This project won first place at the HelixHacks II hackathon and leveraged unity for 3D world modeling and AR integration.',
+    description: 'Computer-vision AR navigation system that won first place at HelixHacks II using Unity and 3D world modeling.',
     tags: ['Python', 'Computer Vision', 'Unity', '3D Modeling'],
     github: 'https://github.com/KamranHussain05/facial-navigation-ar',
     demo: ''
@@ -100,7 +107,7 @@ export function FeaturedProjects() {
           className="mt-12 text-center"
         >
           <a
-            href="https://github.com/yourusername"
+          href="https://github.com/KamranHussain05"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center px-6 py-3 rounded-full border border-primary text-primary hover:bg-primary/10 transition-colors"

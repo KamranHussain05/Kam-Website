@@ -20,7 +20,7 @@ const socialLinks = [
   },
   {
     icon: Mail,
-    href: 'mailto:kahussai@ucsc.com',
+    href: 'mailto:kahussai@ucsc.edu',
     label: 'Email',
   },
 ]
@@ -33,9 +33,8 @@ export function Footer() {
           <div>
             <h3 className="text-lg font-semibold mb-4">Kamran Hussain</h3>
             <p className="text-muted-foreground">
-              Aspiring computational neuroscientist and machine learning researcher 
-              eager to apply machine learning methods to neuroprosthetic devices
-              and build our understanding of the brain.
+              Computational neuroscience & ML researcher working on speech BCIs and neural data—when I&apos;m not decoding spikes,
+              I&apos;m usually fencing or arguing about Star Wars.
             </p>
           </div>
 

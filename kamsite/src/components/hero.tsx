@@ -1,18 +1,18 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { ThemeToggle } from './theme-toggle'
 import { NeuralNetwork } from './neural-network'
 import Image from 'next/image'
+import { FourierName } from './FourierName'
 
 export function Hero() {
   return (
-    <div className="relative min-h-[80vh] flex items-center justify-center overflow-hidden">
+    <div className="relative min-h-[80vh] flex flex-col items-center justify-center overflow-hidden pt-24 md:pt-32"> {/* Increased padding top to clear header */}
       <div className="absolute inset-0 z-0">
         <NeuralNetwork />
       </div>
       
-      <div className="relative z-10 text-center space-y-8">
+      <div className="relative z-10 text-center space-y-8 w-full max-w-4xl px-4"> {/* Added w-full, max-w, px */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -21,7 +21,7 @@ export function Hero() {
         >
           <div className="mb-6 rounded-full overflow-hidden border-4 border-primary shadow-lg">
             <Image 
-              src="https://media.licdn.com/dms/image/v2/D5603AQHD3VFJeWsgWg/profile-displayphoto-shrink_400_400/B56ZZU7l2NHQAg-/0/1745181635193?e=1750896000&v=beta&t=sKAd3u8iBcO6-p9TxhHmpYlRE6PYWVScr2EH3YRXUDQ" 
+              src="https://med.stanford.edu/services/api/cap/profiles/photocache.350483.jpg" 
               alt="Kamran Hussain" 
               width={150} 
               height={150}
@@ -29,11 +29,13 @@ export function Hero() {
               unoptimized
             />
           </div>
-          <h1 className="text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent">
-            Kamran Hussain
-          </h1>
+          
+          <div className="w-full max-w-3xl mx-auto h-[80px] md:h-[120px] my-4">
+            <FourierName />
+          </div>
+
           <p className="mt-4 text-xl md:text-2xl text-muted-foreground">
-            Aspiring Computational Neuroscientist & ML Researcher
+            Computational neuroscience & ML, from organoids to conversational-rate speech BCIs
           </p>
         </motion.div>
 
@@ -50,7 +52,7 @@ export function Hero() {
             Learn More
           </a>
           <a
-            href="mailto:kahussai@usc.edu"
+            href="mailto:kahussai@ucsc.edu"
             className="px-6 py-3 rounded-full border border-primary text-primary hover:bg-primary/10 transition-colors"
           >
             Contact Me
@@ -59,4 +61,4 @@ export function Hero() {
       </div>
     </div>
   )
-} 
+}
