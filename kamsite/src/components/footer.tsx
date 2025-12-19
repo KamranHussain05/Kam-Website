@@ -15,7 +15,7 @@ const socialLinks = [
   },
   {
     icon: Twitter,
-    href: 'https://x.com/kamhn123',
+    href: 'https://x.com/Kamhn123',
     label: 'Twitter',
   },
   {
@@ -43,7 +43,7 @@ export function Footer() {
             <ul className="space-y-2">
               <li>
                 <a
-                  href="#about"
+                  href="/about"
                   className="text-muted-foreground hover:text-primary transition-colors"
                 >
                   About
@@ -51,7 +51,7 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href="#research"
+                  href="/research"
                   className="text-muted-foreground hover:text-primary transition-colors"
                 >
                   Research
@@ -59,7 +59,7 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href="#projects"
+                  href="/projects"
                   className="text-muted-foreground hover:text-primary transition-colors"
                 >
                   Projects
@@ -67,10 +67,10 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href="/blog"
+                  href="/talks"
                   className="text-muted-foreground hover:text-primary transition-colors"
                 >
-                  Blog
+                  Talks & Posters
                 </a>
               </li>
             </ul>
@@ -96,6 +96,7 @@ export function Footer() {
         </div>
 
         <div className="mt-8 pt-8 border-t border-border text-center text-muted-foreground">
+          <p className="mb-2">Kamran Hussain — computational neuroscience / BCI / organoids (UCSC + Stanford)</p>
           <p>© {new Date().getFullYear()} Kamran Hussain. All rights reserved.</p>
         </div>
       </div>

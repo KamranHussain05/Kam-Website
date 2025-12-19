@@ -38,14 +38,15 @@ export function FourierName() {
     if (N === 0) return [];
     const coeffs: FourierCoeff[] = [];
     
-    // Compute DFT for complex input z = x + iy
+    // Compute the Discrete Fourier Transform for complex input z[n] = x[n] + i * y[n]
+    // This allows us to represent any closed loop as a sum of rotating circles (epicycles)
     for (let k = 0; k < N; k++) {
       let re = 0;
       let im = 0;
       for (let n = 0; n < N; n++) {
         const phi = (TWO_PI * k * n) / N;
         // X[k] = sum( z[n] * exp(-i * phi) )
-        // exp(-i * phi) = cos(phi) - i * sin(phi)
+        // Using Euler's formula: exp(-i * phi) = cos(phi) - i * sin(phi)
         // (x + iy) * (cos - i * sin) = (x*cos + y*sin) + i(y*cos - x*sin)
         re += points[n].x * Math.cos(phi) + points[n].y * Math.sin(phi);
         im += points[n].y * Math.cos(phi) - points[n].x * Math.sin(phi);
@@ -54,7 +55,7 @@ export function FourierName() {
       re /= N;
       im /= N;
 
-      const freq = k > N / 2 ? k - N : k;
+      const freq = k > N / 2 ? k - N : k; // Center frequencies
       const amp = Math.sqrt(re * re + im * im);
       const phase = Math.atan2(im, re);
       coeffs.push({ freq, amp, phase });
@@ -62,6 +63,9 @@ export function FourierName() {
     return coeffs;
   };
 
+  /**
+   * Samples points from an SVG path element at regular intervals.
+   */
   const samplePointsFromPath = (pathElement: SVGPathElement, numSamples: number): Point[] => {
     const totalLength = pathElement.getTotalLength();
     if (totalLength === 0) return [];
@@ -73,6 +77,9 @@ export function FourierName() {
     return points;
   };
 
+  /**
+   * Calculates the position of the "pen" at a given time t by summing the Fourier series.
+   */
   const calculateFourierPoint = (
     time: number,
     fourier: FourierCoeff[]
@@ -195,12 +202,10 @@ export function FourierName() {
     ctx.scale(dpr, dpr);
     canvasContextRef.current = ctx;
 
-    // Parse SVG
     const parser = new DOMParser();
     const svgDoc = parser.parseFromString(SVG_NAME_DATA, "image/svg+xml");
     const pathElements = Array.from(svgDoc.querySelectorAll('path'));
 
-    // 1. Collect points for ALL paths first to determine global bounding box
     const allShapesPoints: Point[][] = [];
     let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
 
@@ -227,7 +232,6 @@ export function FourierName() {
         return;
     }
 
-    // 2. Calculate scaling to fit canvas
     const { width: cWidth, height: cHeight } = cssCanvasSizeRef.current;
     const padding = 15;
     const availWidth = cWidth - padding * 2;
@@ -240,26 +244,21 @@ export function FourierName() {
     const scaleY = availHeight / svgHeight;
     const scale = Math.min(scaleX, scaleY);
     
-    // Center it
     const scaledWidth = svgWidth * scale;
     const scaledHeight = svgHeight * scale;
     const offsetX = padding + (availWidth - scaledWidth) / 2 - minX * scale;
     const offsetY = padding + (availHeight - scaledHeight) / 2 - minY * scale;
 
-    // 3. Process each shape separately with the global scale
     const newShapes: LetterShape[] = [];
 
     allShapesPoints.forEach(originalPoints => {
-        // Scale points
         const scaledPoints = originalPoints.map(p => ({
             x: p.x * scale + offsetX,
             y: p.y * scale + offsetY
         }));
 
-        // Compute DFT
         let fourier = dft(scaledPoints);
         
-        // Sort and Filter
         fourier.sort((a, b) => b.amp - a.amp);
         fourier = fourier.slice(0, MAX_FOURIER_TERMS);
         

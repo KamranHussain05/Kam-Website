@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 
-// Helper function to generate a wiggly path
+/**
+ * Helper function to generate a wiggly path between two points.
+ * Uses a Quadratic Bézier curve with a randomized midpoint.
+ */
 const generateWigglyPath = (x1: number, y1: number, x2: number, y2: number, wiggleFactor: number): string => {
   const dx = x2 - x1;
   const dy = y2 - y1;
@@ -19,12 +22,48 @@ const generateWigglyPath = (x1: number, y1: number, x2: number, y2: number, wigg
   return `M ${x1},${y1} Q ${controlX},${controlY} ${x2},${y2}`;
 };
 
+/**
+ * Generates a path that mimics an action potential (spike) waveform.
+ * Includes depolarization, repolarization, and hyperpolarization (undershoot) phases.
+ */
+const generateActionPotentialPath = (width: number, height: number): string => {
+  const points: [number, number][] = [];
+  const numSegments = 15;
+  for (let i = 0; i <= numSegments; i++) {
+    const x = (i / numSegments) * width - (width / 2);
+    const progress = i / numSegments;
+    
+    let y = 0;
+    if (progress > 0.3 && progress < 0.45) {
+      // Depolarization phase: Steep rise
+      y = -((progress - 0.3) / 0.15) * height;
+    } else if (progress >= 0.45 && progress < 0.6) {
+      // Repolarization phase: Fast fall
+      y = -height + ((progress - 0.45) / 0.15) * (height * 1.3);
+    } else if (progress >= 0.6 && progress < 0.8) {
+      // Hyperpolarization phase: Slow return from undershoot
+      y = (height * 0.3) - ((progress - 0.6) / 0.2) * (height * 0.3);
+    }
+    
+    // Add biological "noise" for a more organic feel
+    const noise = (Math.random() - 0.5) * (height * 0.4);
+    y += noise;
+    
+    points.push([x, y]);
+  }
+  
+  return points.reduce((acc, pt, i) => {
+    return acc + (i === 0 ? `M ${pt[0]} ${pt[1]}` : ` L ${pt[0]} ${pt[1]}`);
+  }, "");
+};
+
 interface PathData {
   path: string;
   strokeWidth: string;
   key?: string;
   id?: string;
   colorClass?: string;
+  apPath?: string;
 }
 
 interface GeneratedStuff {
@@ -84,7 +123,7 @@ const Neuron: React.FC<NeuronProps> = ({
   const connectionWiggleFactor = 0.08;
 
   useEffect(() => {
-    // 1. Generate Irregular Soma Path
+    // Generate Irregular Soma Path
     const numSomaPoints = 12;
     let somaPointsArr: [number, number][] = [];
     for (let i = 0; i < numSomaPoints; i++) {
@@ -109,7 +148,7 @@ const Neuron: React.FC<NeuronProps> = ({
     }
     somaPathData += "Z";
 
-    // 2. Generate Generic Dendrites
+    // Generate Generic Dendrites
     const newGenericDendritePaths: PathData[] = [];
     const numGenericDendrites = Math.floor(Math.random() * 5) + 6;
     
@@ -140,7 +179,7 @@ const Neuron: React.FC<NeuronProps> = ({
       }
     }
 
-    // 3. Generate Extended Axon Paths
+    // Generate Extended Axon Paths
     const newExtendedAxonPaths: PathData[] = [];
     const calculatedExtendedAxonTips_absolute: Record<string, { absX: number; absY: number }> = {};
 
@@ -166,6 +205,7 @@ const Neuron: React.FC<NeuronProps> = ({
         path: generateWigglyPath(axonStartX, axonStartY, axonTipLocalX, axonTipLocalY, connectionWiggleFactor),
         strokeWidth: "4",
         colorClass: propPrimaryColor,
+        apPath: generateActionPotentialPath(24, 12),
       });
       calculatedExtendedAxonTips_absolute[target.targetId] = {
         absX: axonTipLocalX + offsetX,
@@ -173,7 +213,7 @@ const Neuron: React.FC<NeuronProps> = ({
       };
     });
 
-    // 4. Generate Receiving Dendrite Paths
+    // Generate Receiving Dendrite Paths
     const newReceivingDendritePaths: PathData[] = [];
     incomingAxonPoints.forEach(source => {
       const sourceAxonTipLocalX = source.absAxonTipX - offsetX;
@@ -188,10 +228,10 @@ const Neuron: React.FC<NeuronProps> = ({
       newReceivingDendritePaths.push({
         key: `rec-dendrite-${id}-from-${source.sourceId}`,
         id: pathId,
-        // Draw FROM dendrite start TO axon tip
         path: generateWigglyPath(dendriteStartX, dendriteStartY, sourceAxonTipLocalX, sourceAxonTipLocalY, connectionWiggleFactor * 1.2),
         strokeWidth: "2.5",
         colorClass: propSecondaryColor,
+        apPath: generateActionPotentialPath(18, 9),
       });
     });
 
@@ -236,11 +276,11 @@ const Neuron: React.FC<NeuronProps> = ({
           <React.Fragment key={axon.key}>
             <path id={axon.id} d={axon.path} stroke="currentColor" className={axon.colorClass} strokeWidth={axon.strokeWidth}/>
             {/* Spike Animation for Axon (Soma -> Tip) */}
-            <circle r="4" fill="white" filter={`url(#glow-${id})`}>
-              <animateMotion dur={`${2 + Math.random()}s`} repeatCount="indefinite" begin={`${Math.random() * 2}s`}>
+            <path d={axon.apPath} stroke="white" strokeWidth="2.5" filter={`url(#glow-${id})`}>
+              <animateMotion dur={`${0.5 + Math.random() * 3}s`} repeatCount="indefinite" begin={`${Math.random() * 5}s`} rotate="auto">
                 <mpath href={`#${axon.id}`}/>
               </animateMotion>
-            </circle>
+            </path>
           </React.Fragment>
         ))}
       </g>
@@ -252,18 +292,19 @@ const Neuron: React.FC<NeuronProps> = ({
             <path id={dendrite.id} d={dendrite.path} stroke="currentColor" className={dendrite.colorClass} strokeWidth={dendrite.strokeWidth}/>
              {/* Spike Animation for Dendrite (Tip -> Soma) */}
              {/* The path is drawn Soma -> Tip, so we need keyPoints to reverse direction */}
-            <circle r="3" fill="white" filter={`url(#glow-${id})`}>
+            <path d={dendrite.apPath} stroke="white" strokeWidth="2" filter={`url(#glow-${id})`}>
               <animateMotion 
-                dur={`${2 + Math.random()}s`} 
+                dur={`${0.5 + Math.random() * 3}s`} 
                 repeatCount="indefinite" 
-                begin={`${Math.random() * 2}s`}
+                begin={`${Math.random() * 5}s`}
                 keyPoints="1;0"
                 keyTimes="0;1"
                 calcMode="linear"
+                rotate="auto"
               >
                 <mpath href={`#${dendrite.id}`}/>
               </animateMotion>
-            </circle>
+            </path>
           </React.Fragment>
         ))}
       </g>

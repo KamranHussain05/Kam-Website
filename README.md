@@ -14,26 +14,23 @@ You can view the live version of the website here: **[https://KamranHussain05.gi
 
 *   **Responsive Design:** Adapts seamlessly to various screen sizes (desktops, tablets, mobiles).
 *   **Project Showcase:** Dedicated section detailing personal and professional projects.
-*   **Content Sections:** Potential blog posts or articles managed via MDX (based on dependencies like `next-mdx-remote`).
-*   **Interactive Elements:** May include animations (`framer-motion`) or 3D graphics (`three.js`).
+*   **Content Sections:** Blog posts or articles rendered using `react-markdown`.
+*   **Interactive Elements:** Includes animations (`framer-motion`), 3D graphics (`three.js`), and procedural simulations.
 *   **Component-Based Architecture:** Built with reusable React components.
 
 ## Tech Stack
 
 This project utilizes the following technologies and libraries:
 
-*   **Framework:** [Next.js](https://nextjs.org/) (^14.1.0) - React framework for server-side rendering, static site generation, and more.
+*   **Framework:** [Next.js](https://nextjs.org/) (^14.1.0) - React framework for static site generation.
 *   **Language:** [TypeScript](https://www.typescriptlang.org/) (^5.3.3) - Superset of JavaScript adding static types.
 *   **Styling:**
     *   [Tailwind CSS](https://tailwindcss.com/) (^3.4.4) - Utility-first CSS framework.
     *   [PostCSS](https://postcss.org/) (^8.4.39) & [Autoprefixer](https://github.com/postcss/autoprefixer) (^10.4.19) - CSS processing.
     *   `tailwindcss-animate`: For integrating Tailwind with animation libraries.
-*   **UI Components:** [Material UI](https://mui.com/) (`@mui/material`, `@mui/icons-material`, `@mui/lab`) - React component library.
 *   **Animation:** [Framer Motion](https://www.framer.com/motion/) (^11.0.8) - Production-ready motion library for React.
 *   **3D Graphics:** [Three.js](https://threejs.org/) (^0.166.0) - JavaScript 3D library.
-*   **Markdown/MDX:**
-    *   `next-mdx-remote` (^4.4.1) - Load MDX content in Next.js.
-    *   `gray-matter` (^4.0.3) - Parse front-matter from files.
+*   **Markdown:**
     *   `react-markdown` (^9.0.1) - Render Markdown as React components.
 *   **Utilities:**
     *   `date-fns` (^3.3.1) - Modern JavaScript date utility library.
@@ -55,19 +52,14 @@ The repository is organized as follows:
 │       └── deploy.yml      # GitHub Actions workflow for CI/CD
 ├── kamsite/                # Root directory for the Next.js application
 │   ├── public/             # Static assets (images, fonts, etc.)
-│   │   ├── src/
-│   │   │   ├── app/            # Core application files (layouts, pages - likely using App Router)
-│   │   │   ├── components/     # Reusable React components
-│   │   │   ├── styles/         # Global CSS styles (if any)
-│   │   ├── .gitignore          # Specifies intentionally untracked files for kamsite
-│   │   ├── next.config.js      # Next.js configuration (handles basePath for GH Pages)
-│   │   ├── package.json        # Project metadata and dependencies for kamsite
-│   │   ├── postcss.config.js   # PostCSS configuration
-│   │   ├── tailwind.config.js  # Tailwind CSS configuration
-│   │   ├── tsconfig.json       # TypeScript configuration
-│   │   └── ...
-│   ├── .gitignore              # Specifies intentionally untracked files for the repo root
-│   └── package.json            # Root package.json (if used for workspace setup or scripts)
+│   ├── src/                # Core application files
+│   │   ├── app/            # Next.js App Router
+│   │   ├── components/     # Reusable React components
+│   │   └── styles/         # Global CSS styles
+│   ├── next.config.js      # Next.js configuration
+│   ├── package.json        # Project metadata and dependencies
+│   ├── tailwind.config.js  # Tailwind CSS configuration
+│   └── tsconfig.json       # TypeScript configuration
 └── README.md               # This file
 ```
 
@@ -76,10 +68,10 @@ The repository is organized as follows:
 
 ## Getting Started (Local Development)
 
-To run this project locally, follow these steps (though you're kinda weird for running someone's personal website locally):
+To run this project locally, follow these steps:
 
 1.  **Prerequisites:**
-    *   [Node.js](https://nodejs.org/) (v18 or later recommended, as used in the deployment workflow)
+    *   [Node.js](https://nodejs.org/) (v18 or later recommended)
     *   [npm](https://www.npmjs.com/) (usually comes with Node.js)
 2.  **Clone the repository:**
     ```bash
@@ -142,4 +134,3 @@ Here's a breakdown of the deployment workflow:
 
 Feel free to explore the code, and if you have any questions or suggestions, please open an issue!
 
-DISCLAIMER: This is a work in progress and I will be updating it as I go along. I certainly used the assistance of LLMs via Cursor, but I really did write the core functional code myself. (Invite me for an interview if you want proof 😉, if there is any crappy code...uhhh...thats not me 😅 I swear!!)

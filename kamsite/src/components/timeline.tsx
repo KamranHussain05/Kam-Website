@@ -32,37 +32,37 @@ const timelineData: TimelineItem[] = [
     year: '2025',
     title: 'ML Research Scientist Intern',
     company: 'Tacit AI / Reflex Technologies',
-    description: 'Zero-shot multimodal silent-speech models on a multi-node GB200 cluster.'
+    description: 'Multimodal speech models & distributed training on B200s.'
   },
   {
     year: '2024',
     title: 'SURFIN Research Fellow',
-    company: 'Neural Prosthetics Translational Lab, Stanford University',
-    description: 'Conversational-rate implanted brain-to-text decoders for people with paralysis.'
+    company: 'Stanford University (NPTL)',
+    description: 'Real-time brain-to-text decoding & speech rate neural coding.'
   },
   {
     year: '2023',
-    title: 'Neural Research Engineer',
-    company: 'Braingeneers, UC Santa Cruz Genomics Institute',
-    description: 'Autoregressive models on HD-MEA organoids and large-scale neural data.',
+    title: 'Undergraduate Research Engineer',
+    company: 'Braingeneers, UC Santa Cruz',
+    description: 'Foundation models for organoids & SpikeData toolkit.',
   },
   {
     year: '2023-2',
     title: 'Founder and CEO',
-    company: 'TensorLearn LLC',
-    description: 'AI study tools and generative interfaces with a 17-person team.',
+    company: 'TensorLearn',
+    description: '$1M+ funding & asset acquisition for AI education tools.',
   },
   {
     year: '2022',
-    title: 'Flight Dynamics, Trajectory, and Controls Intern',
+    title: 'NASA Research Intern',
     company: 'NASA Ames Research Center',
-    description: 'Transformer recommenders and a 50 GB aviation communications dataset.',
+    description: 'Transformer models for aviation service recommendations.',
   },
   {
     year: '2022-2',
     title: 'Neural Data Science Intern',
-    company: 'Translational Neuroengineering Lab, UC San Diego',
-    description: 'Neuropixels recordings in zebra finch songbirds for vocal prosthetics.',
+    company: 'UC San Diego (TNEL)',
+    description: 'Songbird neural data analysis & NWB standardization.',
   },
 ]
 
@@ -75,6 +75,11 @@ const connections: Connection[] = [
   { fromId: '2022', toId: '2022-2', key: 'c4' },
 ]
 
+/**
+ * Timeline Component
+ * Renders a vertical timeline of professional experience with procedural neurons
+ * that dynamically connect to each other based on the timeline data.
+ */
 export function Timeline() {
   const [neuronGeometries, setNeuronGeometries] = useState<NeuronGeometries>({});
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -82,9 +87,13 @@ export function Timeline() {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [containerRect, setContainerRect] = useState<{ left: number; top: number; width: number; height: number }>({ left: 0, top: 0, width: 0, height: 0 });
 
+  /**
+   * Callback received from each Neuron component once its internal geometry (soma, axon tips)
+   * has been calculated. We store these to draw inter-neuron connections.
+   */
   const handleGeometriesCalculated = useCallback((neuronId: string, geometries: NeuronGeometry) => {
     setNeuronGeometries(prev => {
-      // Deep compare to avoid infinite loops if values are same
+      // Deep compare to avoid infinite re-renders
       const prevGeom = prev[neuronId];
       if (prevGeom && 
           prevGeom.somaAbsX === geometries.somaAbsX && 
@@ -97,7 +106,7 @@ export function Timeline() {
   }, []);
 
   useLayoutEffect(() => {
-    // Measure positions after mount and window resize
+    // Measure the positions of all timeline cards to align neurons correctly
     const updatePositions = () => {
         if (!containerRef.current) return;
         
@@ -205,8 +214,7 @@ export function Timeline() {
   });
 
   return (
-    <div className="mt-16">
-      <h3 className="text-2xl font-semibold mb-8 text-center">Professional Journey</h3>
+    <div className="mt-8">
       <div className="relative" ref={containerRef}>
         {/* Main connection line */}
         <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-primary/20" />

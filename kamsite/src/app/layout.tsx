@@ -7,10 +7,14 @@ import '@/styles/globals.css'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
-  title: 'Kamran Hussain - Neuroscience & AI Researcher',
-  description: 'Personal website of Kamran Hussain, focusing on neuroscience research and AI/ML development.',
+  title: {
+    default: 'Kamran Hussain | Computational Neuroscience & AI',
+    template: '%s | Kamran Hussain'
+  },
+  description: 'Kamran Hussain — Researcher at Stanford NPTL and UCSC Braingeneers. Focused on speech BCIs, organoid foundation models, and the interface between minds and machines.',
+  keywords: ['Kamran Hussain', 'Neuroscience', 'BCI', 'Brain-Computer Interface', 'Organoids', 'AI', 'Machine Learning', 'Stanford NPTL', 'UCSC Braingeneers'],
   icons: {
-    icon: '/favicon.png', // Path relative to the public directory
+    icon: '/favicon.png',
   },
 }
 

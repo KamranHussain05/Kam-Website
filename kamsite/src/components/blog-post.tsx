@@ -5,6 +5,8 @@ import { format } from 'date-fns'
 import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
 
+import ReactMarkdown from 'react-markdown'
+
 interface Post {
   title: string
   date: string
@@ -47,32 +49,9 @@ export function BlogPost({ post }: BlogPostProps) {
           <time className="text-sm text-muted-foreground">
             {format(new Date(post.date), 'MMMM d, yyyy')}
           </time>
-          <div
-            className="mt-8"
-            dangerouslySetInnerHTML={{
-              __html: post.content
-                .split('\n')
-                .map((line) => {
-                  if (line.startsWith('# ')) {
-                    return `<h1>${line.slice(2)}</h1>`
-                  }
-                  if (line.startsWith('## ')) {
-                    return `<h2>${line.slice(3)}</h2>`
-                  }
-                  if (line.startsWith('### ')) {
-                    return `<h3>${line.slice(4)}</h3>`
-                  }
-                  if (line.startsWith('- ')) {
-                    return `<li>${line.slice(2)}</li>`
-                  }
-                  if (line.trim() === '') {
-                    return '<br>'
-                  }
-                  return `<p>${line}</p>`
-                })
-                .join(''),
-            }}
-          />
+          <div className="mt-8">
+            <ReactMarkdown>{post.content}</ReactMarkdown>
+          </div>
         </article>
       </motion.div>
     </div>

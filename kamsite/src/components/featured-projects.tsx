@@ -1,36 +1,38 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Github, ExternalLink } from 'lucide-react'
+import { Github } from 'lucide-react'
 
 const projects = [
   {
-    title: 'StatScanner',
-    description: 'iOS app that scans tables from paper and turns them into interactive stats visualizations using custom OCR + CoreML.',
-    tags: ['Swift', 'Computer Vision', 'CoreML'],
-    github: 'https://github.com/KamranHussain05/StatScanner',
-    demo: ''
+    title: 'SpikeData',
+    description: 'Python-based module for creating flexible and robust spike sorting pipelines for high-density neural recordings.',
+    tags: ['Python', 'Neuroscience', 'Data Science'],
+    github: 'https://github.com/braingeneers/spikedata',
   },
   {
     title: 'Polaris',
-    description: 'On-device predictive maintenance for fishing vessels using sensor fusion and edge ML.',
-    tags: ['Embedded C++', 'Python', 'Sensor Fusion'],
+    description: 'On-device predictive maintenance for fishing vessels using sensor fusion and edge ML. 1st Place at Sushi Hackathon 2025.',
+    tags: ['Edge AI', 'IoT', 'Python', 'Sensor Fusion'],
     github: 'https://github.com/KamranHussain05',
-    demo: ''
   },
   {
-    title: 'EMG Personal Computer Use',
-    description: 'EMG wristband that turns muscle activity into cursor control and clicks, built as a teaching BCI project.',
-    tags: ['Python', 'ML', 'Neuroscience'],
-    github: 'https://github.com/KamranHussain05/NeuroTechSCPersonalUse',
-    demo: ''
+    title: 'StatScanner',
+    description: 'iOS app that scans tables from paper and turns them into interactive stats visualizations using custom OCR + CoreML.',
+    tags: ['Swift', 'Computer Vision', 'CoreML', 'iOS'],
+    github: 'https://github.com/KamranHussain05/StatScanner',
   },
   {
-    title: 'Gesture Driven Augmented Reality Navigation',
-    description: 'Computer-vision AR navigation system that won first place at HelixHacks II using Unity and 3D world modeling.',
-    tags: ['Python', 'Computer Vision', 'Unity', '3D Modeling'],
-    github: 'https://github.com/KamranHussain05/facial-navigation-ar',
-    demo: ''
+    title: 'Sushi Agent',
+    description: 'Autonomous LLM agents that discover and negotiate for private coupons. 2nd Place at Sushi Hackathon 2024.',
+    tags: ['LLM', 'Agents', 'Python', 'NLP'],
+    github: 'https://github.com/KamranHussain05',
+  },
+  {
+    title: 'Rubauto',
+    description: 'Generative diffusion model for stylistic music synthesis and high-fidelity audio variations.',
+    tags: ['Diffusion Models', 'PyTorch', 'Audio ML'],
+    github: 'https://github.com/KamranHussain05',
   },
 ]
 
@@ -83,15 +85,6 @@ export function FeaturedProjects() {
                   >
                     <Github className="w-5 h-5 mr-2" />
                     Code
-                  </a>
-                  <a
-                    href={project.demo}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center text-muted-foreground hover:text-primary transition-colors"
-                  >
-                    <ExternalLink className="w-5 h-5 mr-2" />
-                    Demo
                   </a>
                 </div>
               </div>

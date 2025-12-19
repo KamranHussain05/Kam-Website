@@ -8,10 +8,10 @@ import Link from 'next/link'
 
 const navItems = [
   { label: 'Home', href: '/' },
-  { label: 'About', href: '/#about' },
-  { label: 'Research', href: '/#research' },
-  { label: 'Projects', href: '/#projects' },
-  { label: 'Contact', href: 'https://www.linkedin.com/in/kamran-hussain1/' },
+  { label: 'About', href: '/about' },
+  { label: 'Research', href: '/research' },
+  { label: 'Projects', href: '/projects' },
+  { label: 'Talks', href: '/talks' },
 ]
 
 export function Navbar() {

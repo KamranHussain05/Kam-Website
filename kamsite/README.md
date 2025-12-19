@@ -25,7 +25,7 @@ A modern, responsive personal website built with Next.js, TypeScript, and Tailwi
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/Kam-Website.git
+   git clone https://github.com/KamranHussain05/Kam-Website.git
    cd Kam-Website/kamsite
    ```
 

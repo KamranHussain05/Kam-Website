@@ -34,6 +34,7 @@ export function NeuralNetwork() {
       opacity: 0.6,
     })
 
+    // Generate random nodes in 3D space
     for (let i = 0; i < 50; i++) {
       const node = new THREE.Mesh(nodeGeometry, nodeMaterial)
       node.position.set(
@@ -45,8 +46,8 @@ export function NeuralNetwork() {
       scene.add(node)
     }
 
-    // Create connections
-    const connections: THREE.Line[] = []
+    // Create connections between nodes
+    const connections: { line: THREE.Line; startNode: THREE.Mesh; endNode: THREE.Mesh }[] = []
     const lineMaterial = new THREE.LineBasicMaterial({
       color: 0x3b82f6,
       transparent: true,
@@ -55,13 +56,14 @@ export function NeuralNetwork() {
 
     nodes.forEach((node, i) => {
       nodes.slice(i + 1).forEach((otherNode) => {
+        // Randomly connect nodes to create a network-like structure
         if (Math.random() < 0.1) {
           const geometry = new THREE.BufferGeometry().setFromPoints([
             node.position,
             otherNode.position,
           ])
           const line = new THREE.Line(geometry, lineMaterial)
-          connections.push(line)
+          connections.push({ line, startNode: node, endNode: otherNode })
           scene.add(line)
         }
       })
@@ -70,19 +72,33 @@ export function NeuralNetwork() {
     // Position camera
     camera.position.z = 5
 
-    // Animation
+    // Animation loop
     const animate = () => {
       requestAnimationFrame(animate)
 
+      // Move nodes slightly for a "living" effect
       nodes.forEach((node) => {
         node.position.x += (Math.random() - 0.5) * 0.01
         node.position.y += (Math.random() - 0.5) * 0.01
         node.position.z += (Math.random() - 0.5) * 0.01
+        
+        // Keep nodes within a certain boundary
+        const limit = 6;
+        if (Math.abs(node.position.x) > limit) node.position.x *= 0.95;
+        if (Math.abs(node.position.y) > limit) node.position.y *= 0.95;
+        if (Math.abs(node.position.z) > limit) node.position.z *= 0.95;
       })
 
-      connections.forEach((line) => {
-        const positions = line.geometry.attributes.position
-        positions.needsUpdate = true
+      // Update connection lines to follow moving nodes
+      connections.forEach(({ line, startNode, endNode }) => {
+        const positions = line.geometry.attributes.position.array as Float32Array;
+        positions[0] = startNode.position.x;
+        positions[1] = startNode.position.y;
+        positions[2] = startNode.position.z;
+        positions[3] = endNode.position.x;
+        positions[4] = endNode.position.y;
+        positions[5] = endNode.position.z;
+        line.geometry.attributes.position.needsUpdate = true;
       })
 
       renderer.render(scene, camera)
