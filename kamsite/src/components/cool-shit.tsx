@@ -18,7 +18,7 @@ export function CoolShit() {
         >
           <div className="flex flex-col items-center">
             <div className="flex items-center space-x-4 mb-4">
-              <h2 className="text-3xl md:text-4xl font-bold">Cool Shit (That you Missed!)</h2>
+              <h2 className="text-3xl md:text-4xl font-bold">Build Log</h2>
               <motion.div
                 animate={{ rotate: isOpen ? 180 : 0 }}
                 transition={{ duration: 0.3 }}
