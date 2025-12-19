@@ -28,28 +28,33 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: "18" # Or your preferred Node version
+          node-version: "18"
           cache: 'npm'
-          cache-dependency-path: kamsite/package-lock.json # Point to lock file inside kamsite
+          cache-dependency-path: kamsite/package-lock.json
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
-        # No base path needed here as next.config.js handles it based on NODE_ENV
+
       - name: Install dependencies
         run: npm install
-        working-directory: ./kamsite # Run install in kamsite directory
+        working-directory: ./kamsite
+
       - name: Build with Next.js
         run: npm run build
-        working-directory: ./kamsite # Run build in kamsite directory
+        working-directory: ./kamsite
         env:
-          # Ensure NODE_ENV is production so next.config.js sets the basePath
-          NODE_ENV: production 
+          NODE_ENV: production
+
+      - name: Set custom domain CNAME (apex)
+        run: echo "kamranhussain.com" > ./kamsite/out/CNAME
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload the output directory from the kamsite folder
           path: ./kamsite/out
 
   # Deployment job
