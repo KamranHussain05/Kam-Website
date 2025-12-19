@@ -9,14 +9,13 @@ const SVG_NAME_DATA = `
 const SVG_NS = "http://www.w3.org/2000/svg";
 const TWO_PI = 2 * Math.PI;
 
-const NUM_PATH_SAMPLES = 200;
-const MAX_FOURIER_TERMS = 40; // Reduced for smoother, less noisy paths
+const NUM_PATH_SAMPLES = 400;
+const MAX_FOURIER_TERMS = 80; 
 
 interface Point { x: number; y: number }
 interface FourierCoeff { freq: number; amp: number; phase: number }
 interface LetterShape {
-  fourierX: FourierCoeff[];
-  fourierY: FourierCoeff[];
+  fourier: FourierCoeff[];
   path: Point[];
 }
 
@@ -34,23 +33,31 @@ export function FourierName() {
   const cssCanvasSizeRef = useRef({ width: 0, height: 0 });
   const themeColorsRef = useRef({ stroke: '#FFFFFF', fill: 'rgba(255, 255, 255, 0.8)' });
 
-
-  const dft = (values: number[]): FourierCoeff[] => {
-    const N = values.length;
+  const dft = (points: Point[]): FourierCoeff[] => {
+    const N = points.length;
     if (N === 0) return [];
     const coeffs: FourierCoeff[] = [];
+    
+    // Compute DFT for complex input z = x + iy
     for (let k = 0; k < N; k++) {
-      let re = 0, im = 0;
+      let re = 0;
+      let im = 0;
       for (let n = 0; n < N; n++) {
         const phi = (TWO_PI * k * n) / N;
-        re += values[n] * Math.cos(phi);
-        im -= values[n] * Math.sin(phi);
+        // X[k] = sum( z[n] * exp(-i * phi) )
+        // exp(-i * phi) = cos(phi) - i * sin(phi)
+        // (x + iy) * (cos - i * sin) = (x*cos + y*sin) + i(y*cos - x*sin)
+        re += points[n].x * Math.cos(phi) + points[n].y * Math.sin(phi);
+        im += points[n].y * Math.cos(phi) - points[n].x * Math.sin(phi);
       }
+      
       re /= N;
       im /= N;
+
+      const freq = k > N / 2 ? k - N : k;
       const amp = Math.sqrt(re * re + im * im);
       const phase = Math.atan2(im, re);
-      coeffs.push({ freq: k, amp, phase });
+      coeffs.push({ freq, amp, phase });
     }
     return coeffs;
   };
@@ -68,25 +75,16 @@ export function FourierName() {
 
   const calculateFourierPoint = (
     time: number,
-    fourierX: FourierCoeff[],
-    fourierY: FourierCoeff[]
+    fourier: FourierCoeff[]
   ): Point => {
     let x = 0;
     let y = 0;
     
-    // Calculate X
-    for (let i = 0; i < fourierX.length; i++) {
-      const { freq, amp, phase } = fourierX[i];
-      x += amp * Math.cos(freq * time + phase);
-    }
-    
-    // Calculate Y
-    for (let i = 0; i < fourierY.length; i++) {
-      const { freq, amp, phase } = fourierY[i];
-      // Note: Phase shift PI/2 is often used in epicycle visualization logic 
-      // but standard DFT reconstruction just sums the terms. 
-      // Since we computed DFT on Y coords directly, we use standard reconstruction.
-      y += amp * Math.cos(freq * time + phase);
+    for (let i = 0; i < fourier.length; i++) {
+      const { freq, amp, phase } = fourier[i];
+      const theta = freq * time + phase;
+      x += amp * Math.cos(theta);
+      y += amp * Math.sin(theta);
     }
     
     return { x, y };
@@ -142,7 +140,7 @@ export function FourierName() {
     // Iterate through all shapes simultaneously
     shapes.forEach(shape => {
       // Calculate current point for this shape
-      const point = calculateFourierPoint(timeRef.current, shape.fourierX, shape.fourierY);
+      const point = calculateFourierPoint(timeRef.current, shape.fourier);
       
       // Add to path
       shape.path.push(point);
@@ -259,22 +257,14 @@ export function FourierName() {
         }));
 
         // Compute DFT
-        const xCoords = scaledPoints.map(p => p.x);
-        const yCoords = scaledPoints.map(p => p.y);
-        
-        let fourierX = dft(xCoords);
-        let fourierY = dft(yCoords);
+        let fourier = dft(scaledPoints);
         
         // Sort and Filter
-        fourierX.sort((a, b) => b.amp - a.amp);
-        fourierY.sort((a, b) => b.amp - a.amp);
-        
-        fourierX = fourierX.slice(0, MAX_FOURIER_TERMS);
-        fourierY = fourierY.slice(0, MAX_FOURIER_TERMS);
+        fourier.sort((a, b) => b.amp - a.amp);
+        fourier = fourier.slice(0, MAX_FOURIER_TERMS);
         
         newShapes.push({
-            fourierX,
-            fourierY,
+            fourier,
             path: []
         });
     });
