@@ -3,14 +3,25 @@
 import { motion } from 'framer-motion'
 import { Presentation, FileText, Calendar, MapPin, ExternalLink } from 'lucide-react'
 
-const talks = [
+type Talk = {
+  title: string
+  venue: string
+  date: string
+  location: string
+  type: string
+  link: string
+  linkLabel?: string
+}
+
+const talks: Talk[] = [
   {
     title: 'Advancing Speech BCIs Towards Conversational Rates in People with Paralysis',
     venue: 'BCI Society Conference, Research Plenary Talk',
     date: 'Jun 2025',
     location: 'Banff, Canada',
     type: 'Invited Talk',
-    link: '#'
+    link: 'https://www.youtube.com/watch?v=X-tBf0QpwC0&t=6s',
+    linkLabel: 'Watch recording'
   },
   {
     title: 'Generative Foundation Model for Cortical Organoid Electrophysiology',
@@ -95,9 +106,15 @@ export default function TalksContent() {
                     <span className="flex items-center"><MapPin className="w-4 h-4 mr-1" /> {talk.location}</span>
                   </div>
                 </div>
-                {talk.link !== '#' && (
-                  <a href={talk.link} className="inline-flex items-center text-primary hover:underline font-medium">
-                    View Slides <ExternalLink className="w-4 h-4 ml-1" />
+                {talk.link && talk.link !== '#' && (
+                  <a
+                    href={talk.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={talk.linkLabel ?? 'View Slides'}
+                    className="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
+                  >
+                    <ExternalLink className="w-5 h-5" />
                   </a>
                 )}
               </div>

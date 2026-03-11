@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 import { NeuralNetwork } from './neural-network'
 import Image from 'next/image'
 import { FourierName } from './FourierName'
-import { Mail, Github, Linkedin, CheckCircle2, Twitter } from 'lucide-react'
+import { Mail, Github, Linkedin, Twitter } from 'lucide-react'
 
 export function Hero() {
   return (
@@ -38,21 +38,6 @@ export function Hero() {
           <p className="mt-4 text-xl md:text-2xl text-muted-foreground font-medium">
             Computational neuroscience & ML, from organoids to conversational-rate speech BCIs
           </p>
-
-          <div className="mt-8 space-y-3 text-left max-w-2xl mx-auto">
-            <div className="flex items-start space-x-3 text-lg">
-              <CheckCircle2 className="w-6 h-6 text-primary shrink-0 mt-0.5" />
-              <span><strong>147 wpm</strong> imagined speech brain-to-text decoding (online demos) at <strong>Stanford NPTL</strong></span>
-            </div>
-            <div className="flex items-start space-x-3 text-lg">
-              <CheckCircle2 className="w-6 h-6 text-primary shrink-0 mt-0.5" />
-              <span><strong>HD-MEA organoid foundation models</strong> + SpikeData toolkit (Braingeneers/UCSC)</span>
-            </div>
-            <div className="flex items-start space-x-3 text-lg">
-              <CheckCircle2 className="w-6 h-6 text-primary shrink-0 mt-0.5" />
-              <span><strong>Generative Interfaces</strong> at <strong>TensorLearn</strong></span>
-            </div>
-          </div>
         </motion.div>
 
         <motion.div
