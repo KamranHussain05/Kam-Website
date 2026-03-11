@@ -54,7 +54,7 @@ const timelineData: TimelineItem[] = [
   },
   {
     year: '2022',
-    title: 'NASA Research Intern',
+    title: 'Flight Dynamics, Trajectory and Controls Intern',
     company: 'NASA Ames Research Center',
     description: 'Transformer models for aviation service recommendations.',
   },

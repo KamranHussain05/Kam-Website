@@ -7,7 +7,12 @@ export function generateStaticParams() {
   }))
 }
 
-export default function BlogPostPage({ params }: { params: { slug: string } }) {
-  const post = posts[params.slug as keyof typeof posts]
+export default async function BlogPostPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}) {
+  const { slug } = await params
+  const post = posts[slug as keyof typeof posts]
   return <BlogPost post={post} />
 } 
