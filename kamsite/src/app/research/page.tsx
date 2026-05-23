@@ -2,8 +2,9 @@ import ResearchContent from '@/components/research-content'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Research | Speech BCIs & Organoid Foundation Models',
-  description: 'Exploring the intersection of neuroscience and AI through speech neuroprosthetics and organoid modeling.'
+  title: 'Research | Preprints & Publications',
+  description:
+    'Preprints on spike population forecasting, neural benchmarks, and agentic spike analysis, alongside speech BCI work at Stanford NPTL and UCSC Braingeneers.',
 }
 
 export default function ResearchPage() {

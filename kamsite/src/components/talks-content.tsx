@@ -73,8 +73,12 @@ export default function TalksContent() {
         <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
           Presenting research at the intersection of machine learning and neuroscience.
         </p>
-        <p className="text-sm italic text-muted-foreground">
-          Manuscripts in preparation; preprints will appear here when public.
+        <p className="text-sm text-muted-foreground">
+          Preprints are listed on the{' '}
+          <a href="/research" className="hover:underline">
+            Research
+          </a>{' '}
+          page.
         </p>
       </section>
 

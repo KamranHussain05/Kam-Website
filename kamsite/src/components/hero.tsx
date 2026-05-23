@@ -5,6 +5,7 @@ import { NeuralNetwork } from './neural-network'
 import Image from 'next/image'
 import { FourierName } from './FourierName'
 import { Mail, Github, Linkedin, Twitter } from 'lucide-react'
+import { ProfileLinks } from '@/components/profile-links'
 
 export function Hero() {
   return (
@@ -80,6 +81,7 @@ export function Hero() {
             <Twitter className="w-4 h-4" />
             <span>X (Twitter)</span>
           </a>
+          <ProfileLinks inline />
         </motion.div>
       </div>
     </div>
