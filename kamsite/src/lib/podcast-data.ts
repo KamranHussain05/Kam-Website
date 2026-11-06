@@ -7,7 +7,8 @@
  * notes; links keep research and primary-source references and drop obsolete
  * email, newsletter, and social prompts.
  *
- * This page is unlisted: nothing else on the site links to /podcast/.
+ * The archive is kept out of the page navigation; the only link to it is the
+ * small one at the bottom of the footer.
  */
 
 export type PodcastEpisode = {

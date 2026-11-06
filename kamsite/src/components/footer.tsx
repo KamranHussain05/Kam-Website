@@ -27,6 +27,11 @@ export function Footer() {
           <ProfileLinks className="text-[0.95rem]" />
           <p>© {new Date().getFullYear()} {siteName}</p>
         </div>
+        <p className="mt-4 text-xs">
+          <Link href="/podcast/" className="hover:text-foreground hover:underline transition-colors">
+            The Kam Show podcast archive
+          </Link>
+        </p>
       </div>
     </footer>
   )

@@ -4,8 +4,8 @@ import { PodcastEpisodes } from '@/components/podcast-episodes'
 import { episodes, podcast } from '@/lib/podcast-data'
 import { withBasePath } from '@/lib/site-data'
 
-// Unlisted archive: reachable by direct URL only. Nothing else on the site links
-// here, and search engines are asked not to index it (links may still be followed).
+// Archive page: kept out of the page navigation (only a small footer link points
+// here), and search engines are asked not to index it (links may still be followed).
 export const metadata: Metadata = {
   title: { absolute: podcast.title },
   description: podcast.intro,

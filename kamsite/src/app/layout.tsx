@@ -16,7 +16,8 @@ export const metadata: Metadata = {
   },
   description: `${siteName}: ${shortDescription.toLowerCase()} working on speech brain–computer interfaces, models of neural activity, and tools for electrophysiology data.`,
   icons: {
-    icon: '/favicon.png',
+    icon: '/favicon.png?v=2',
+    shortcut: '/favicon.ico?v=2',
   },
 }
 

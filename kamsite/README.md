@@ -5,7 +5,7 @@ Personal research website built with Next.js 15 (App Router, static export), Typ
 ## Pages
 
 - `/` Home, `/research/` Research (papers, talks, posters), `/projects/` Projects: the public navigation.
-- `/podcast/` The Kam Show archive: unlisted (no links from the site, `noindex, follow`).
+- `/podcast/` The Kam Show archive: not in the navigation, linked only from a small footer link; `noindex, follow`.
 - `/about/` and `/talks/`: forwarding pages to `/` and `/research/#talks`.
 - `/blog/`: legacy posts, kept out of navigation.
 
@@ -14,7 +14,7 @@ Content lives in typed records in `src/lib/site-data.ts` (papers, talks, posters
 ## Getting Started
 
 ```bash
-cd Kam-Website/kamsite
+cd Kam-Website/kamsite   # requires Node 20.9+ (CI uses Node 22)
 npm install
 npm run dev        # http://localhost:3000
 ```

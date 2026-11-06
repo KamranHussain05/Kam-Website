@@ -2,7 +2,8 @@
 /**
  * Checks the static export for the site's structural rules:
  *   - public navigation is exactly Home, Research, Projects
- *   - the podcast archive is unlisted (no links to it, noindex, not in a sitemap)
+ *   - the podcast archive stays out of the page navigation (linked only from the
+ *     footer's small archive link), is noindex, and is not in a sitemap
  *   - retired /about/ and /talks/ URLs forward to their new homes
  *   - no email, ORCID, or placeholder "#" links
  *
@@ -56,9 +57,9 @@ for (const file of htmlFiles(outDir)) {
   const html = fs.readFileSync(file, 'utf8')
   const hrefs = hrefsIn(html).map(strip)
 
-  if (rel !== 'podcast/index.html') {
-    check(!hrefs.some((h) => /\/podcast\/?($|[#?])/.test(h)), `${rel} links to the unlisted podcast`)
-  }
+  const anchorHrefs = [...html.matchAll(/<a\s[^>]*href="([^"]*)"/g)].map((m) => strip(m[1]))
+  const podcastLinks = anchorHrefs.filter((h) => /\/podcast\/?($|[#?])/.test(h)).length
+  check(podcastLinks <= 1, `${rel} links to the podcast ${podcastLinks} times (only the footer link is expected)`)
   check(!/mailto:/i.test(html), `${rel} contains a mailto: link`)
   check(!/orcid\.org/i.test(html), `${rel} contains an ORCID link`)
   check(!hrefs.includes('#'), `${rel} contains a placeholder href="#"`)
