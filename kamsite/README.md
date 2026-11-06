@@ -1,79 +1,49 @@
 # Kamran Hussain's Personal Website
 
-A modern, responsive personal website built with Next.js, TypeScript, and Tailwind CSS. The website features a dynamic theme, interactive components, and a blog section.
+Personal research website built with Next.js 15 (App Router, static export), TypeScript, and Tailwind CSS, deployed to GitHub Pages at kamranhussain.com.
 
-## Features
+## Pages
 
-- 🌓 Dynamic light/dark mode
-- 🎨 Modern and aesthetic design
-- 📱 Fully responsive
-- ⚡ Fast and optimized
-- 📝 Blog section with markdown support
-- 🧠 Interactive neural network visualization
-- 🎭 Smooth animations and transitions
+- `/` Home, `/research/` Research (papers, talks, posters), `/projects/` Projects: the public navigation.
+- `/podcast/` The Kam Show archive: unlisted (no links from the site, `noindex, follow`).
+- `/about/` and `/talks/`: forwarding pages to `/` and `/research/#talks`.
+- `/blog/`: legacy posts, kept out of navigation.
 
-## Tech Stack
-
-- Next.js 14
-- TypeScript
-- Tailwind CSS
-- Framer Motion
-- Three.js
-- GitHub Pages
+Content lives in typed records in `src/lib/site-data.ts` (papers, talks, posters, projects, links) and `src/lib/podcast-data.ts` (episodes migrated from the RSS feed).
 
 ## Getting Started
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/KamranHussain05/Kam-Website.git
-   cd Kam-Website/kamsite
-   ```
-
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-
-3. Run the development server:
-   ```bash
-   npm run dev
-   ```
-
-4. Open [http://localhost:3000](http://localhost:3000) in your browser.
+```bash
+cd Kam-Website/kamsite
+npm install
+npm run dev        # http://localhost:3000
+```
 
 ## Building for Production
 
-1. Build the project:
-   ```bash
-   npm run build
-   ```
+```bash
+CI=true npm run build      # static export to out/, root base path as deployed
+npm run check:export       # structural checks on the exported HTML
+```
 
-2. Export the static site:
-   ```bash
-   npm run export
-   ```
+Without `CI=true`, a production build uses the legacy `/Kam-Website` base path.
 
 ## Deployment
 
-The website is configured to deploy to GitHub Pages. To deploy:
-
-1. Make sure your repository is set up with GitHub Pages
-2. Run the deployment command:
-   ```bash
-   npm run deploy
-   ```
+Pushing to `main` runs `.github/workflows/deploy.yml`, which builds the export and publishes `kamsite/out` to GitHub Pages with the custom-domain `CNAME`.
 
 ## Project Structure
 
 ```
 kamsite/
 ├── src/
-│   ├── app/              # Next.js app directory
+│   ├── app/              # Routes
 │   ├── components/       # React components
-│   ├── styles/          # Global styles
-│   └── content/         # Blog content
-├── public/              # Static assets
-└── package.json         # Dependencies and scripts
+│   ├── lib/              # Site and podcast content records
+│   └── styles/           # Global styles
+├── public/               # Static assets (CNAME, images)
+├── scripts/              # Export checks
+└── package.json
 ```
 
 ## Customization

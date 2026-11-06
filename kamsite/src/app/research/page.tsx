@@ -2,9 +2,10 @@ import ResearchContent from '@/components/research-content'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Research | Preprints & Publications',
+  title: 'Research',
   description:
-    'Preprints on spike population forecasting, neural benchmarks, and agentic spike analysis, alongside speech BCI work at Stanford NPTL and UCSC Braingeneers.',
+    'Preprints, talks, and posters on speech brain–computer interfaces, neural population forecasting, and tools for spike data analysis.',
+  alternates: { canonical: '/research/' },
 }
 
 export default function ResearchPage() {

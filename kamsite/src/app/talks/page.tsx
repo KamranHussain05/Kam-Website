@@ -1,11 +1,13 @@
-import TalksContent from '@/components/talks-content'
 import { Metadata } from 'next'
+import { ForwardingPage } from '@/components/forwarding-page'
 
+// Retired Talks page: talks and posters now live on the Research page.
 export const metadata: Metadata = {
-  title: 'Talks & Posters | Research Presentations',
-  description: 'Public trail of evidence: research posters and invited talks at major BCI and AI conferences.'
+  title: 'Moved',
+  robots: { index: false, follow: true },
+  alternates: { canonical: '/research/' },
 }
 
 export default function TalksPage() {
-  return <TalksContent />
+  return <ForwardingPage to="/research/#talks" label="Talks on the Research page" />
 }

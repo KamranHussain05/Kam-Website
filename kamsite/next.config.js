@@ -1,19 +1,24 @@
 /** @type {import('next').NextConfig} */
 
 const isProd = process.env.NODE_ENV === 'production'
-const isCI = process.env.CI === 'true' // Check for CI environment variable
-const repoName = 'Kam-Website' // Your GitHub repository name
+const isCI = process.env.CI === 'true' // GitHub Actions sets CI=true
+const repoName = 'Kam-Website'
+
+// The deployed site (custom domain) is served from the root. A local production
+// build without CI=true keeps the legacy repository base path.
+const basePath = isProd && !isCI ? `/${repoName}` : ''
 
 const nextConfig = {
-  output: 'export', // Ensures static export
+  output: 'export', // Static export for GitHub Pages
   images: {
     unoptimized: true, // Required for static export with next/image
   },
-  // Set basePath only for production builds *unless* in CI (GitHub Actions)
-  basePath: isProd && !isCI ? `/${repoName}` : '',
-  // Optional: Set assetPrefix if basePath doesn't cover all assets (usually not needed with basePath)
-  // assetPrefix: isProd && !isCI ? `/${repoName}/` : '',
-  trailingSlash: true, // Optional: Consistent URL structure
+  basePath,
+  // Exposed so string asset URLs and forwarding pages can include the base path.
+  env: {
+    NEXT_PUBLIC_BASE_PATH: basePath,
+  },
+  trailingSlash: true,
 }
 
-module.exports = nextConfig 
+module.exports = nextConfig

@@ -1,100 +1,56 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
-import { ThemeToggle } from './theme-toggle'
-import { Menu, X } from 'lucide-react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { ThemeToggle } from './theme-toggle'
+import { navItems, siteName } from '@/lib/site-data'
 
-const navItems = [
-  { label: 'Home', href: '/' },
-  { label: 'About', href: '/about' },
-  { label: 'Research', href: '/research' },
-  { label: 'Projects', href: '/projects' },
-  { label: 'Talks', href: '/talks' },
-]
+function normalize(path: string) {
+  return path.length > 1 ? path.replace(/\/+$/, '') : path
+}
 
+/**
+ * Static header. With three destinations the navigation stays visible and
+ * wraps on narrow screens instead of hiding behind a menu button.
+ */
 export function Navbar() {
-  const [isScrolled, setIsScrolled] = useState(false)
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 0)
-    }
-
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  const pathname = normalize(usePathname() ?? '/')
 
   return (
-    <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.5 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-200 ${
-        isScrolled ? 'bg-background/80 backdrop-blur-sm shadow-sm' : 'bg-transparent'
-      }`}
-    >
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
-          <Link href="/" className="text-xl font-bold">
-            KH
-          </Link>
-
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            {navItems.map((item) => (
-              <Link
-                key={item.label}
-                href={item.href}
-                className="text-muted-foreground hover:text-primary transition-colors"
-              >
-                {item.label}
-              </Link>
-            ))}
-            <ThemeToggle />
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            className="md:hidden p-2"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          >
-            {isMobileMenuOpen ? (
-              <X className="w-6 h-6" />
-            ) : (
-              <Menu className="w-6 h-6" />
-            )}
-          </button>
+    <header className="border-b border-border">
+      <div className="page-container flex flex-wrap items-center justify-between gap-x-6 gap-y-1 py-3">
+        <Link
+          href="/"
+          className="font-semibold tracking-tight text-foreground hover:text-primary transition-colors"
+        >
+          {siteName}
+        </Link>
+        <div className="flex items-center gap-1 sm:gap-3">
+          <nav aria-label="Primary">
+            <ul className="flex items-center gap-4 sm:gap-6 text-[0.95rem]">
+              {navItems.map((item) => {
+                const active = normalize(item.href) === pathname
+                return (
+                  <li key={item.href}>
+                    <Link
+                      href={item.href}
+                      aria-current={active ? 'page' : undefined}
+                      className={`inline-block py-2 border-b-2 transition-colors ${
+                        active
+                          ? 'border-primary text-foreground font-medium'
+                          : 'border-transparent text-muted-foreground hover:text-foreground'
+                      }`}
+                    >
+                      {item.label}
+                    </Link>
+                  </li>
+                )
+              })}
+            </ul>
+          </nav>
+          <ThemeToggle />
         </div>
-
-        {/* Mobile Navigation */}
-        {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="md:hidden py-4"
-          >
-            <div className="flex flex-col space-y-4">
-              {navItems.map((item) => (
-                <Link
-                  key={item.label}
-                  href={item.href}
-                  className="text-muted-foreground hover:text-primary transition-colors"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  {item.label}
-                </Link>
-              ))}
-              <div className="pt-4">
-                <ThemeToggle />
-              </div>
-            </div>
-          </motion.div>
-        )}
       </div>
-    </motion.nav>
+    </header>
   )
-} 
+}

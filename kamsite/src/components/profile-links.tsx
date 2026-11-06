@@ -1,54 +1,25 @@
-import { GoogleScholarIcon, OrcidIcon } from '@/components/icons/profile-icons'
-import { outlinePillClassName, profileLinks } from '@/lib/site-data'
+import { profileLinks } from '@/lib/site-data'
 
 type ProfileLinksProps = {
   className?: string
-  align?: 'start' | 'center'
-  /** Render links as siblings (e.g. inside the hero button row). */
-  inline?: boolean
 }
 
-function ScholarOrcidLinks() {
+/** Compact, wrapping row of external profile links (Scholar, GitHub, LinkedIn, X). */
+export function ProfileLinks({ className = '' }: ProfileLinksProps) {
   return (
-    <>
-      <a
-        href={profileLinks.googleScholar}
-        target="_blank"
-        rel="noopener noreferrer"
-        className={outlinePillClassName}
-      >
-        <GoogleScholarIcon />
-        <span>Google Scholar</span>
-      </a>
-      <a
-        href={profileLinks.orcid}
-        target="_blank"
-        rel="noopener noreferrer"
-        className={outlinePillClassName}
-      >
-        <OrcidIcon />
-        <span>ORCID</span>
-      </a>
-    </>
-  )
-}
-
-export function ProfileLinks({
-  className = '',
-  align = 'center',
-  inline = false,
-}: ProfileLinksProps) {
-  if (inline) {
-    return <ScholarOrcidLinks />
-  }
-
-  const alignClass = align === 'start' ? 'justify-start' : 'justify-center'
-
-  return (
-    <div
-      className={`flex flex-wrap gap-4 ${alignClass} ${className}`.trim()}
-    >
-      <ScholarOrcidLinks />
-    </div>
+    <ul className={`flex flex-wrap gap-x-5 gap-y-1 ${className}`.trim()}>
+      {profileLinks.map((link) => (
+        <li key={link.href}>
+          <a
+            href={link.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-link"
+          >
+            {link.label}
+          </a>
+        </li>
+      ))}
+    </ul>
   )
 }

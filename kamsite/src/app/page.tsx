@@ -1,24 +1,18 @@
 import { Hero } from '@/components/hero'
-import { FeaturedProjects } from '@/components/featured-projects'
 import { ResearchThreads } from '@/components/research-threads'
-import { Timeline } from '@/components/timeline'
-import { CoolShit } from '@/components/cool-shit'
+import { Background } from '@/components/background'
+import { FeaturedProjects } from '@/components/featured-projects'
 
 export default function Home() {
   return (
-    <div className="space-y-0">
+    <>
       <Hero />
       <ResearchThreads />
-      <section className="py-24">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Professional Journey</h2>
-          </div>
-          <Timeline />
-        </div>
-      </section>
+      <Background />
       <FeaturedProjects />
-      <CoolShit />
-    </div>
+      <section aria-label="Interests" className="border-t border-border pt-10">
+        <p className="max-w-[42rem]">Outside research, I fence and enjoy science fiction.</p>
+      </section>
+    </>
   )
-} 
+}

@@ -1,89 +1,32 @@
-'use client'
-
-import { motion } from 'framer-motion'
-import { NeuralNetwork } from './neural-network'
 import Image from 'next/image'
 import { FourierName } from './FourierName'
-import { Mail, Github, Linkedin, Twitter } from 'lucide-react'
 import { ProfileLinks } from '@/components/profile-links'
+import { portrait, shortDescription, siteName, withBasePath } from '@/lib/site-data'
 
 export function Hero() {
   return (
-    <div className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden pt-24 md:pt-32 pb-32 md:pb-48">
-      <div className="absolute inset-0 z-0">
-        <NeuralNetwork />
-      </div>
-      
-      <div className="relative z-10 text-center space-y-8 w-full max-w-4xl px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="flex flex-col items-center"
-        >
-          <div className="mb-6 rounded-full overflow-hidden border-4 border-primary shadow-lg">
-            <Image 
-              src="https://med.stanford.edu/services/api/cap/profiles/photocache.350483.jpg" 
-              alt="Kamran Hussain" 
-              width={150} 
-              height={150}
-              className="rounded-full"
-              unoptimized
-            />
-          </div>
-          
-          <div className="w-full max-w-3xl mx-auto h-[80px] md:h-[120px] my-4">
-            <FourierName />
-          </div>
-
-          <p className="mt-4 text-xl md:text-2xl text-muted-foreground font-medium">
-            Computational neuroscience & ML, from organoids to conversational-rate speech BCIs
+    <section className="pt-10 pb-12 sm:pt-14 sm:pb-14" aria-labelledby="intro-heading">
+      <div className="flex flex-col-reverse gap-6 sm:flex-row sm:items-start sm:justify-between sm:gap-10">
+        <div className="min-w-0 max-w-[40rem]">
+          <FourierName text={siteName} id="intro-heading" />
+          <p className="mt-2 text-lg text-muted-foreground sm:text-xl">
+            {shortDescription}
           </p>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.2, duration: 0.5 }}
-          className="flex flex-wrap justify-center gap-4"
-        >
-          <a
-            href="mailto:kahussai@ucsc.edu"
-            className="flex items-center space-x-2 px-5 py-2.5 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
-          >
-            <Mail className="w-4 h-4" />
-            <span>Email</span>
-          </a>
-          <a
-            href="https://github.com/kamranhussain05"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center space-x-2 px-5 py-2.5 rounded-full border border-primary text-primary hover:bg-primary/10 transition-colors"
-          >
-            <Github className="w-4 h-4" />
-            <span>GitHub</span>
-          </a>
-          <a
-            href="https://linkedin.com/in/kamran-hussain1"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center space-x-2 px-5 py-2.5 rounded-full border border-primary text-primary hover:bg-primary/10 transition-colors"
-          >
-            <Linkedin className="w-4 h-4" />
-            <span>LinkedIn</span>
-          </a>
-          <a
-            href="https://x.com/Kamhn123"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center space-x-2 px-5 py-2.5 rounded-full border border-primary text-primary hover:bg-primary/10 transition-colors"
-          >
-            <Twitter className="w-4 h-4" />
-            <span>X (Twitter)</span>
-          </a>
-          <ProfileLinks inline />
-        </motion.div>
+          <p className="mt-5">
+            I work on speech brain–computer interfaces, models of neural
+            activity, and tools for analyzing electrophysiology data.
+          </p>
+          <ProfileLinks className="mt-5" />
+        </div>
+        <Image
+          src={withBasePath(portrait.src)}
+          alt={portrait.alt}
+          width={portrait.width}
+          height={portrait.height}
+          priority
+          className="h-24 w-24 shrink-0 rounded-full object-cover sm:h-36 sm:w-36"
+        />
       </div>
-    </div>
+    </section>
   )
 }

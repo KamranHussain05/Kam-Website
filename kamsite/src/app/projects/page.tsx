@@ -2,8 +2,10 @@ import ProjectsContent from '@/components/projects-content'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Projects | Case Studies in BCI & AI',
-  description: 'Detailed case studies of systems built at the intersection of neuroscience and machine learning.'
+  title: 'Projects',
+  description:
+    'Research software for neural spike data, including SpikeLab and SpikeData, and other machine learning and app projects.',
+  alternates: { canonical: '/projects/' },
 }
 
 export default function ProjectsPage() {

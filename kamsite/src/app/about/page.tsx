@@ -1,11 +1,13 @@
-import AboutContent from '@/components/about-content'
 import { Metadata } from 'next'
+import { ForwardingPage } from '@/components/forwarding-page'
 
+// Retired About page: forwards to the homepage, which now carries the background.
 export const metadata: Metadata = {
-  title: 'About | Story & Principles',
-  description: 'The story behind my work, my personal interests, and the principles that drive my research and engineering.'
+  title: 'Moved',
+  robots: { index: false, follow: true },
+  alternates: { canonical: '/' },
 }
 
 export default function AboutPage() {
-  return <AboutContent />
+  return <ForwardingPage to="/" label="the homepage" />
 }

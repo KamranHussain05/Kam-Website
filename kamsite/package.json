@@ -11,7 +11,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "export": "next build && next export"
+    "check:export": "node scripts/check-export.mjs out"
   },
   "dependencies": {
     "autoprefixer": "^10.4.19",
